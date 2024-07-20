@@ -15,7 +15,7 @@ public interface File
     //String PATH = "C:\\Users\\Thiel\\Desktop\\ISS\\Semester 2\\GUIPROG\\Testfiles\\Saturn_V.stl";
     //String PATH = "C:\\Users\\Thiel\\Desktop\\ISS\\Semester 2\\GUIPROG\\Testfiles\\NASA.stl";
     //String PATH = "C:\\Users\\Thiel\\Desktop\\ISS\\Semester 2\\GUIPROG\\Testfiles\\ALIEN.stl";
-    String DIRECTORY = "C:\\Users\\Thiel\\Desktop\\ISS\\Semester 2\\GUIPROG\\Testfiles\\";
+    String DIRECTORY = "src/main/resources/org/openjfx/guiprog_ea_thiel_michael_5205110/";
     String EXTENSION = ".stl";
     //String PATH = "C:\\Users\\Thiel\\Desktop\\ISS\\Semester 2\\GUIPROG\\Testfiles\\Rey.stl";
 
