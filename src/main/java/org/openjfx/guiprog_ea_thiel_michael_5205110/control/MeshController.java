@@ -3,10 +3,11 @@ package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polygon;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Vertex;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 public class MeshController {
     public float[] mapPoints(Polyhedron polyhedron) {
-        System.out.println("Mapping Points...");
+        Console.log("Mapping Points...");
         float[] points = new float[polyhedron.getPolygons().size() * 9];
 
         for (int i = 0; i < polyhedron.getPolygons().size(); i++) {

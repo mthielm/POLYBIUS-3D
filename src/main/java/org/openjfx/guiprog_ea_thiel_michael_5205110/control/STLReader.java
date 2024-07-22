@@ -2,19 +2,30 @@ package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.*;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.util.File;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 /**
- * Provides Methods to parse STL-Files (Both Binary and ASCII).
+ * Implements a BufferedReader to read STL files in ASCII and binary format.
+ * The class is used to parse the file and create a Polyhedron object.
+
+ * @see BufferedReader
  *
  * @author mthiel
- * @see BufferedReader
  */
 public class STLReader
 {
+    /**
+     * Parses an input file depending on the file format.
+     *
+     * @param file The input file selected through the user prompt.
+     * @return The Polyhedron object.
+     */
     public static Polyhedron parse(String file)
     {
         try {
@@ -34,6 +45,14 @@ public class STLReader
         }
         return null;
     }
+
+    /**
+     * Reads an ASCII file and creates a Polyhedron object.
+     *
+     * @param fileName The input file selected through the user prompt.
+     * @return The Polyhedron object.
+     * @throws IOException If an I/O error occurs.
+     */
     public static Polyhedron readASCII(String fileName) throws IOException
     {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -48,6 +67,7 @@ public class STLReader
         {
             data = data.trim();
 
+            // Parses facet data
             if (data.startsWith("facet"))
             {
 
@@ -60,6 +80,7 @@ public class STLReader
                 tempFace = new Vector(nx, ny, nz);
 
             }
+            // Parses vertex data
             else if (data.startsWith("vertex"))
             {
                 String[] parts = data.split("\\s+");
@@ -70,6 +91,7 @@ public class STLReader
 
                 tempPoly.addVertex(new Vertex(x, y, z));
             }
+            // Resulting polygon is added to the polyhedron
             else if (data.equals("endfacet"))
             {
                 tempPoly.setNormal(tempFace);
@@ -80,11 +102,11 @@ public class STLReader
 
                 polyhedron.addPolygon(tempPoly);
 
-                //Update info box in GUI
+                // Update info box in GUI
                 FileInfo.getInstance().setPolygonCount(polyhedron.getPolygons().toArray().length);
-                FileInfo.getInstance().setFileFormat("ASCII");
+                FileInfo.getInstance().setFileFormat(File.ASCII_FORMAT);
 
-                //Nebenläufigkeit für Volumenberechnung
+                // Concurrent calculation of volume
                 PolygonListManager.getInstance().addPolygon(tempPoly);
 
                 tempPoly = new Polygon();
@@ -95,7 +117,13 @@ public class STLReader
         return polyhedron;
     }
 
-
+    /**
+     * Reads a binary file and creates a Polyhedron object.
+     *
+     * @param file The input file selected through the user prompt.
+     * @return The Polyhedron object.
+     * @throws IOException If an I/O error occurs.
+     */
     private static Polyhedron readBinary(String file) throws IOException
     {
         DataInputStream inputStream = new DataInputStream(new FileInputStream(file));
@@ -104,16 +132,17 @@ public class STLReader
         // Read the next 4 bytes as an unsigned integer (number of triangles)
         byte[] bytes = new byte[4];
         inputStream.readFully(bytes);
+
         // Convert to an unsigned int using little-endian order
         ByteBuffer buffer = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN);
         int numberOfTriangles = buffer.getInt();
 
         // Print the number of triangles
-        System.out.println("Number of triangles: " + numberOfTriangles);
+        Console.log(Literals.NUMBER_OF_TRIANGLES + numberOfTriangles);
 
         //Update info box in GUI
         FileInfo.getInstance().setPolygonCount(numberOfTriangles);
-        FileInfo.getInstance().setFileFormat("BINARY");
+        FileInfo.getInstance().setFileFormat(File.BINARY_FORMAT);
 
         Polyhedron polyhedron = new Polyhedron();
         Polygon tempPoly = new Polygon();
@@ -133,18 +162,20 @@ public class STLReader
                 float z = readFloat(inputStream);
                 tempPoly.addVertex(new Vertex(x, y, z));
             }
+            // Adds resulting polygon to the polyhedron
             tempPoly.setNormal(tempFace);
 
             tempPoly.addEdge(new Edge(tempPoly.getVertices().get(0), tempPoly.getVertices().get(1)));
             tempPoly.addEdge(new Edge(tempPoly.getVertices().get(1), tempPoly.getVertices().get(2)));
             tempPoly.addEdge(new Edge(tempPoly.getVertices().get(2), tempPoly.getVertices().get(0)));
 
-            inputStream.skipBytes(2); // Skip attribute byte count
+            // Skip 2 Byte unsigned int after each polygon
+            inputStream.skipBytes(Constants.BINARY_UNSIGNED_INT_SIZE_BYTES);
 
             polyhedron.addPolygon(tempPoly);
             polyhedron.setNumPolygons(numberOfTriangles);
 
-            //Nebenläufigkeit für Volumenberechnung
+            // Concurrent calculation of volume
             PolygonListManager.getInstance().addPolygon(tempPoly);
 
             tempPoly = new Polygon();
@@ -152,13 +183,28 @@ public class STLReader
         return polyhedron;
     }
 
+    /**
+     * Converts 4 bytes from an input stream to a float using little-endian order.
+     *
+     * @param inputStream The input stream.
+     * @return The resulting float value.
+     * @throws IOException If an I/O error occurs.
+     */
     private static float readFloat(DataInputStream inputStream) throws IOException
     {
-        byte[] bytes = new byte[4];
+        byte[] bytes = new byte[Constants.BINARY_FLOAT_SIZE_BYTES];
         inputStream.readFully(bytes);
         return ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
     }
 
+    /**
+     * Determines whether the input file is in ASCII or binary format.
+     *
+     * @param data The input stream to read from.
+     * @return True if the file is in ASCII format,
+     *         False if it is in binary format.
+     * @throws IOException If an I/O error occurs.
+     */
     private static boolean isASCII(DataInputStream data) throws IOException
     {
         byte[] header = new byte[Constants.BINARY_HEADER];
@@ -166,14 +212,14 @@ public class STLReader
         String headerStr = new String(header);
         data.close();
 
-        if(headerStr.startsWith("solid"))
+        if(headerStr.startsWith(File.ASCII_HEADER_TAG))
         {
-            System.out.println("Datei ist im ASCII Format.");
+            Console.log(File.ASCII_FORMAT_MESSAGE);
             return true;
         }
         else
         {
-            System.out.println("Datei ist im Binary Format.");
+            Console.log(File.BINARY_FORMAT_MESSAGE);
             return false;
         }
     }

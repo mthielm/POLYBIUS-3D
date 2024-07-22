@@ -5,6 +5,7 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.control.PolyhedronController
 import org.openjfx.guiprog_ea_thiel_michael_5205110.control.STLReaderThread;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.control.SurfaceCalculatorThread;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.net.Peer2PeerTest;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Scanner;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Timer;
@@ -12,10 +13,18 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
 
 /**
- * @author Michael Thiel (5205110)
+ * Main class of the program. Initializes the program and starts the GUI.
+ *
+ * @author mthiel
  */
 public class Main
 {
+    /**
+     * Main method of the program. Starts the program, prompts the user for a file name.
+     * Parses the file and initializes the GUI. Opens a connection for Peer2Peer.
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args)
     {
         Console.log(Literals.WELCOME_TITLE);
@@ -71,7 +80,7 @@ public class Main
         Polygon3D polygon3D = Polygon3D.getInstance();
         polygon3D.setupMesh(points, textures, combinedFaces);
 
-        //PolygonApplication.main(args);
+        //PolyhedronViewer.main(args);
 
         // Starts GUI and opens connection for Peer2Peer
         Peer2PeerTest peer2PeerTest = new Peer2PeerTest();

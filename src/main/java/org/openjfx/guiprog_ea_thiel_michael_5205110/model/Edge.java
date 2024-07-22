@@ -9,66 +9,76 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
  */
 public class Edge
 {
+    /**
+     * The start vertex of the edge.
+     */
     private Vertex start;
-    private Vertex end;
-    private double length;
 
+    /**
+     * The end vertex of the edge.
+     */
+    private Vertex end;
+
+    /**
+     * Default constructor.
+     *
+     * @param start The start vertex of the edge.
+     * @param end  The end vertex of the edge.
+     */
     public Edge(Vertex start, Vertex end)
     {
         this.start = start;
         this.end = end;
-        this.length = calculateLength(start,end);
     }
 
-    private double calculateLength(Vertex v1, Vertex v2)
-    {
-        double x = v1.getX() - v2.getX();
-        double y = v1.getY() - v2.getY();
-        double z = v1.getZ() - v2.getZ();
-
-        return Math.sqrt(x * x + y * y + z * z);
-    }
-
-    public boolean isValid()
-    {
-        return !start.equals(end);
-    }
-
+    /**
+     * Getter for the start vertex.
+     *
+     * @return The start vertex of the edge.
+     */
     public Vertex getStart()
     {
         return start;
     }
 
+    /**
+     * Getter for the end vertex.
+     *
+     * @return The end vertex of the edge.
+     */
     public Vertex getEnd()
     {
         return end;
     }
 
+    /**
+     * Setter for the start vertex.
+     *
+     * @param start The start vertex of the edge.
+     */
     public void setStart(Vertex start)
     {
         this.start = start;
     }
 
+    /**
+     * Setter for the end vertex.
+     *
+     * @param end The end vertex of the edge.
+     */
     public void setEnd(Vertex end)
     {
         this.end = end;
     }
 
-    public double getLength()
-    {
-        return length;
-    }
-
-    public void setLength(double length)
-    {
-        this.length = length;
-    }
-
+    /**
+     * Returns the Edge as a string representation.
+     *
+     * @return The Edge as a string representation.
+     */
     @Override
     public String toString()
     {
-        return start +
-                "-->" + end +
-                ", length=" + length + '\n' + Literals.INDENT;
+        return start + Literals.ARROW + end + Literals.NEW_LINE + Literals.INDENT;
     }
 }

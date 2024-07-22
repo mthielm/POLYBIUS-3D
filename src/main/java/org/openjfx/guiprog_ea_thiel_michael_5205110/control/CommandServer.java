@@ -1,7 +1,7 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
-import org.openjfx.guiprog_ea_thiel_michael_5205110.GUIController;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -32,10 +32,10 @@ public class CommandServer implements Runnable
         }
         catch (java.io.IOException e)
         {
-            System.out.println("Error: " + e.getMessage());
+            Console.log("Error: " + e.getMessage());
             return;
         }
-        System.out.println("Waiting for client to connect...");
+        Console.log("Waiting for client to connect...");
         java.net.Socket client = null;
         try
         {
@@ -44,10 +44,10 @@ public class CommandServer implements Runnable
         }
         catch (java.io.IOException e)
         {
-            System.out.println("Error Accepting: " + e.getMessage());
+            Console.log("Error Accepting: " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Client connected!");
+        Console.log("Client connected!");
         serveClient(client);
     }
 
@@ -78,14 +78,14 @@ public class CommandServer implements Runnable
             }
             catch (java.io.IOException e)
             {
-                System.out.println("Error Eingabe/Ausgabe: " + e.getMessage());
+                Console.log("Error Eingabe/Ausgabe: " + e.getMessage());
             }
         }
 
     /*private static void parseCommand(String input)
     {
         String[] parts = input.split(" ");
-        System.out.println("Command: " + parts[0] + "/" + parts[1] + "/" + parts[2]);
+        Console.log("Command: " + parts[0] + "/" + parts[1] + "/" + parts[2]);
         String command = parts[0];
         if (command.equals("translate"))
         {
@@ -96,9 +96,9 @@ public class CommandServer implements Runnable
 
             // Call the method in MeshController class to translate
             GUIController.getInstance().translate(axis, distance);
-            System.out.println("Tatsächlich angesteuerter Controller: " + GUIController.getInstance());
+            Console.log("Tatsächlich angesteuerter Controller: " + GUIController.getInstance());
 
-            System.out.println("Translation: (" + axis + "," + distance + ")");
+            Console.log("Translation: (" + axis + "," + distance + ")");
         } else if (command.equals("rotate"))
         {
 
@@ -107,7 +107,7 @@ public class CommandServer implements Runnable
             float angle = Float.parseFloat(parts[2]);
             // Call the method in MeshController class to rotate
             GUIController.getInstance().rotate(axis, angle);
-            System.out.println("Rotation: (" + axis + "," + angle + ")");
+            Console.log("Rotation: (" + axis + "," + angle + ")");
         }
     }*/
 
@@ -116,7 +116,7 @@ public class CommandServer implements Runnable
             ObjectInputStream in = new ObjectInputStream(client.getInputStream());
             return (Polyhedron) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error: " + e.getMessage());
+            Console.log("Error: " + e.getMessage());
             return null;
         }
     }

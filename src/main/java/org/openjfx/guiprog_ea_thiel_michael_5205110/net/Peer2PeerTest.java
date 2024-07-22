@@ -1,5 +1,6 @@
-package org.openjfx.guiprog_ea_thiel_michael_5205110;
+package org.openjfx.guiprog_ea_thiel_michael_5205110.net;
 
+import org.openjfx.guiprog_ea_thiel_michael_5205110.PolyhedronViewer;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.control.CommandClient;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.control.CommandServer;
 
@@ -18,7 +19,7 @@ public class Peer2PeerTest {
                 }
             }
             (new Thread(new CommandClient("127.0.0.1", 1235))).start();
-            PolygonApplication.main(args);
+            PolyhedronViewer.main(args);
         }).start();
     }
 }

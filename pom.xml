@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                org.openjfx.guiprog_ea_thiel_michael_5205110/org.openjfx.guiprog_ea_thiel_michael_5205110.PolygonApplication
+                                org.openjfx.guiprog_ea_thiel_michael_5205110/org.openjfx.guiprog_ea_thiel_michael_5205110.PolyhedronViewer
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

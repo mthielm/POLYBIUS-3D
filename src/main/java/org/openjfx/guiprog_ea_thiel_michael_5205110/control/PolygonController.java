@@ -7,18 +7,45 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 import java.util.List;
 
+/**
+ * Controller class for polygons. Provides methods to calculate the surface area of a polygon.
+ * The class is implemented as a singleton.
+ *
+ * @see Polygon
+ *
+ * @author mthiel
+ */
 public class PolygonController
 {
+    /**
+     * The singleton instance of the class.
+     */
     private static final PolygonController instance = new PolygonController();
 
+    /**
+     * Default private Constructor.
+     */
     private PolygonController()
+    {}
+
+    /**
+     * Returns the singleton instance of the class.
+     *
+     * @return The singleton instance of the class.
+     */
+    public static PolygonController getInstance()
     {
-        //Console.log("Polygon Controller wurde erstellt.");
+        return instance;
     }
 
+    /**
+     * Calculates the area of a polygon.
+     *
+     * @param polygon The polygon for which the area is to be calculated.
+     */
     public void calculateArea(Polygon polygon)
     {
-        double area = 0.0;
+        double area;
         List<Vertex> vertices = polygon.getVertices();
         if (vertices.size() >= 3)
         {
@@ -31,10 +58,4 @@ public class PolygonController
             polygon.setArea(area);
         }
     }
-
-    public static PolygonController getInstance()
-    {
-        return instance;
-    }
-
 }

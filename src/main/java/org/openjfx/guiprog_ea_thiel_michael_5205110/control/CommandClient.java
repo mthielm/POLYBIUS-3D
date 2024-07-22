@@ -1,7 +1,7 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
-import org.openjfx.guiprog_ea_thiel_michael_5205110.GUIController;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -31,8 +31,8 @@ public class CommandClient implements Runnable
         }
         catch (java.io.IOException e)
         {
-            //System.out.println("P2P: Waiting to establish connection...");
-            //System.out.println("Error: " + e.getMessage());
+            //Console.log("P2P: Waiting to establish connection...");
+            //Console.log("Error: " + e.getMessage());
             return null;
         }
     }
@@ -40,7 +40,7 @@ public class CommandClient implements Runnable
     private void readAndSend(java.net.Socket socket)
     {
         while (socket == null) {
-            //System.out.println("Error: Could not connect to server. Retrying in 1 second...");
+            //Console.log("Error: Could not connect to server. Retrying in 1 second...");
             try {
                 Thread.sleep(10000); // wait for 1 second before retrying
                 socket = openSocket();
@@ -56,7 +56,7 @@ public class CommandClient implements Runnable
             java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(socket.getInputStream()));
             java.io.PrintWriter out = new java.io.PrintWriter(socket.getOutputStream(), true);
             java.io.BufferedReader keyboard = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
-            System.out.println("Please enter a command: ");
+            Console.log("Please enter a command: ");
             String command;
 
             while(true)
@@ -79,7 +79,7 @@ public class CommandClient implements Runnable
         }
         catch (java.io.IOException e)
         {
-            System.out.println("Error: " + e.getMessage());
+            Console.log("Error: " + e.getMessage());
         }
     }
 
@@ -89,7 +89,7 @@ public class CommandClient implements Runnable
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(polyhedron);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            Console.log("Error: " + e.getMessage());
         }
     }
 }

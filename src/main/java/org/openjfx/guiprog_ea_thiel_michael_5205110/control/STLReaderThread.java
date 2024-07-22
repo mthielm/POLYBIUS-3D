@@ -19,7 +19,7 @@ public class STLReaderThread extends Thread {
         polyhedron = reader.parse(file);
         // Add a special "end" polygon to signal the end of parsing
         PolygonListManager.getInstance().addPolygon(new Polygon());
-        //System.out.println("Reader thread stopped");
+        //Console.log("Reader thread stopped");
     }
 
     public Polyhedron getPolyhedron()

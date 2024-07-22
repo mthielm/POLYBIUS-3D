@@ -1,4 +1,4 @@
-package org.openjfx.guiprog_ea_thiel_michael_5205110;
+package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.CullFace;
-import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.MeshView;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
@@ -26,12 +25,10 @@ import javafx.scene.transform.Transform;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.openjfx.guiprog_ea_thiel_michael_5205110.control.MeshController;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
-import org.openjfx.guiprog_ea_thiel_michael_5205110.control.CommandServer;
-import org.openjfx.guiprog_ea_thiel_michael_5205110.control.CommandClient;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -429,14 +426,14 @@ public class GUIController implements Initializable
         }
 
         // Printing the coordinates and rotations
-        System.out.println("Coordinates: X=" + translateX + ", Y=" + translateY + ", Z=" + translateZ);
-        System.out.println("Rotations: X=" + rotationX + "°, Y=" + rotationY + "°, Z=" + rotationZ + "°");
+        Console.log("Coordinates: X=" + translateX + ", Y=" + translateY + ", Z=" + translateZ);
+        Console.log("Rotations: X=" + rotationX + "°, Y=" + rotationY + "°, Z=" + rotationZ + "°");
     }
 
     public void parseCommand(String input)
     {
         String[] parts = input.split(" ");
-        System.out.println("Command: " + parts[0] + "/" + parts[1] + "/" + parts[2]);
+        Console.log("Command: " + parts[0] + "/" + parts[1] + "/" + parts[2]);
         String command = parts[0];
         if (command.equals("translate"))
         {
@@ -447,18 +444,17 @@ public class GUIController implements Initializable
 
             // Call the method in MeshController class to translate
             GUIController.getInstance().translate(axis, distance);
-            System.out.println("Tatsächlich angesteuerter Controller: " + GUIController.getInstance());
+            Console.log("Tatsächlich angesteuerter Controller: " + GUIController.getInstance());
 
-            System.out.println("Translation: (" + axis + "," + distance + ")");
+            Console.log("Translation: (" + axis + "," + distance + ")");
         } else if (command.equals("rotate"))
         {
-
             // Perform rotation
             String axis = parts[1];
             float angle = Float.parseFloat(parts[2]);
             // Call the method in MeshController class to rotate
             GUIController.getInstance().rotate(axis, angle);
-            System.out.println("Rotation: (" + axis + "," + angle + ")");
+            Console.log("Rotation: (" + axis + "," + angle + ")");
         }
     }
 }
