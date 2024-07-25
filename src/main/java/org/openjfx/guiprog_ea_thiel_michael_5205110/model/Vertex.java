@@ -5,105 +5,74 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 /**
  * Represents a vertex in 3D space.
  *
+ * @param x The x-coordinate of the vertex.
+ * @param y The y-coordinate of the vertex.
+ * @param z The z-coordinate of the vertex.
  * @author mthiel
  */
-public class Vertex
-{
-    /**
-     * The x-coordinate of the vertex.
-     */
-    private float x;
-    /**
-     * The y-coordinate of the vertex.
-     */
-    private float y;
-    /**
-     * The z-coordinate of the vertex.
-     */
-    private float z;
-
+public record Vertex(float x, float y, float z) {
     /**
      * Default constructor.
      *
      * @param x The x-coordinate of the vertex.
      * @param y The y-coordinate of the vertex.
      * @param z The z-coordinate of the vertex.
+     * @Praecondition: x, y, z are float values.
+     * @Postcondition: A new Vertex object is created with the given x, y, z
+     * values.
      */
-    public Vertex(float x, float y, float z)
-    {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public Vertex {
     }
 
     /**
      * Getter for x-coordinate.
+     * Overrides the default x method.
      *
      * @return The x-coordinate of the vertex.
+     * @Praecondition: x is a float value.
+     * @Postcondition: The x-coordinate of the vertex is returned.
      */
-    public float getX()
-    {
+    @Override
+    public float x() {
         return x;
     }
 
     /**
      * Getter for y-coordinate.
+     * Overrides the default y method.
      *
      * @return The y-coordinate of the vertex.
+     * @Praecondition: y is a float value.
+     * @Postcondition: The y-coordinate of the vertex is returned.
      */
-    public float getY()
-    {
+    @Override
+    public float y() {
         return y;
     }
 
     /**
      * Getter for z-coordinate.
+     * Overrides the default z method.
      *
      * @return The z-coordinate of the vertex.
+     * @Praecondition: z is a float value.
+     * @Postcondition: The z-coordinate of the vertex is returned.
      */
-    public float getZ()
-    {
+    @Override
+    public float z() {
         return z;
     }
 
     /**
-     * Setter for x-coordinate.
-     *
-     * @param x The x-coordinate of the vertex.
-     */
-    public void setX(float x)
-    {
-        this.x = x;
-    }
-
-    /**
-     * Setter for y-coordinate.
-     *
-     * @param y The y-coordinate of the vertex.
-     */
-    public void setY(float y)
-    {
-        this.y = y;
-    }
-
-    /**
-     * Setter for z-coordinate.
-     *
-     * @param z The z-coordinate of the vertex.
-     */
-    public void setZ(float z)
-    {
-        this.z = z;
-    }
-
-    /**
      * Returns a string representation of the vertex.
+     * Overrides the default toString method.
      *
      * @return A string representation of the vertex.
+     * @Praecondition: x, y, z are float values.
+     * @Postcondition: A string representation of the vertex is returned.
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return Literals.OPEN_PARENTHESIS
                 + x + Literals.COMMA_X
                 + y + Literals.COMMA_Y
@@ -111,5 +80,3 @@ public class Vertex
                 Literals.CLOSE_PARENTHESIS;
     }
 }
-
-

@@ -12,12 +12,20 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Timer;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
 
-// ToDo: control-package -> check comments and warnings!
-// ToDo: Java-Docs -> @post, @pre
+// ToDo: all packages and classes -> check comments and warnings!
+// ToDo: Java-Docs -> @post, @pre, @date
 /**
+ * This is the application "<b>Polybius 3-D</b>", which was created as a
+ * submission for
+ * development work in the summer semester of 2024 as part of the
+ * "Informatik: Software- und Systemtechnik B.Sc." degree program of the City
+ * University of Bremen. It is an individual work.<br>
+ *
  * Main class of the program. Initializes the program and starts the GUI.
  *
  * @author mthiel
+ * @version 1.0
+ * @Date: 2021-07-15
  */
 public class Main
 {
@@ -27,6 +35,8 @@ public class Main
      * Parses the file and initializes the GUI. Opens a connection for Peer2Peer.
      *
      * @param args Command line arguments
+     * @Praecondition: -
+     * @Postcondition: Program is running.
      */
     public static void main(String[] args)
     {

@@ -7,10 +7,13 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 /**
  * This class is responsible for reading an STL file in a separate thread.
+ *
+ * @author mthiel
  */
 public class STLReaderThread extends Thread {
     /** The file to be read. */
     private final String file;
+
     /** The polyhedron that is created from the file. */
     private Polyhedron polyhedron;
 

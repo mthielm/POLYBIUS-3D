@@ -24,9 +24,12 @@ import java.io.IOException;
 public class PolyhedronViewer extends Application
 {
     /**
-     * Main method of the program. Calls the launch method of the Application class.
+     * Main method of the program. Calls the launch method of the Application
+     * class.
      *
-     * @param args Command line arguments
+     * @param args Command line arguments.
+     * @Praecondition: -
+     * @Postcondition: Program is running.
      */
     public static void main(String[] args)
     {
@@ -35,34 +38,43 @@ public class PolyhedronViewer extends Application
 
     /**
      * Initializes the JavaFX application. Called by the launch method.
-     * Once the FXML file is loaded, the GUIController is called and the stage is displayed.
+     * Once the FXML file is loaded, the GUIController is called and the stage
+     * is displayed.
+     * Overrides the start method of the Application class.
      *
      * @param stage The stage to display the GUI.
      * @throws IOException If the FXML file cannot be loaded.
+     * @Praecondition: -
+     * @Postcondition: GUI is displayed.
      */
     @Override
     public void start(Stage stage) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(PolyhedronViewer.class.getResource(File.FXML_FILE));
+        FXMLLoader loader = new FXMLLoader(PolyhedronViewer.class.
+                getResource(File.FXML_FILE));
         AnchorPane root = loader.load();
         GUIController controller = loader.getController();
 
         controller.setStage();
 
-        Scene scene = new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        Scene scene = new Scene(root, Constants.SCREEN_WIDTH,
+                                Constants.SCREEN_HEIGHT);
 
         //Alternative Rotation Code
         MeshController meshController = new MeshController();
-        double[] origin = meshController.findOrigin(Polygon3D.getInstance().getPoints().toArray(new float[0]));
-        GUIController.getInstance().setPivotX(origin[0]);
-        GUIController.getInstance().setPivotY(origin[1]);
-        GUIController.getInstance().setPivotZ(origin[2]);
+        double[] origin = meshController.findOrigin(Polygon3D.getInstance().
+                getPoints().toArray(new float[Constants.ZERO]));
+        GUIController.getInstance().setPivotX(origin[Constants.ZERO]);
+        GUIController.getInstance().setPivotY(origin[Constants.ONE]);
+        GUIController.getInstance().setPivotZ(origin[Constants.TWO]);
 
         root.getChildren().add(controller.drawMesh(scene));
         //Console.log(root.getChildren());
 
-        controller.updateTexts(FileInfo.getInstance().getFileName(), FileInfo.getInstance().getFileFormat(), FileInfo.getInstance().getPolygonCount());
-        root.getChildren().get(14).toBack();
+        controller.updateTexts(FileInfo.getInstance().getFileName(),
+                               FileInfo.getInstance().getFileFormat(),
+                               FileInfo.getInstance().getPolygonCount());
+        root.getChildren().get(Constants.FOURTEEN).toBack();
 
         stage.setTitle(Literals.GUI_TITLE);
 

@@ -40,6 +40,8 @@ import static javafx.scene.transform.Rotate.*;
  * The GUIController class is responsible for handling the GUI events and
  * updating the GUI.
  *
+ * @author mthiel
+ *
  * @see javafx.fxml.Initializable
  */
 public class GUIController implements Initializable
@@ -72,44 +74,59 @@ public class GUIController implements Initializable
 
     /** Anchor points for the rotation. */
     double anchorX;
+
     /** Anchor points for the rotation. */
     double anchorY;
+
     /** Rotation speed of the mesh. */
     private double rotationSpeed = Constants.ONE;
+
     /** Anchor angles for the rotation. */
     private double anchorAngleX = Constants.ZERO;
+
     /** Anchor angles for the rotation. */
     private double anchorAngleY = Constants.ZERO;
+
     /** Pivot points for the rotation. */
     double pivotX;
+
     /** Pivot points for the rotation. */
     double pivotY;
+
     /** Pivot points for the rotation. */
     double pivotZ;
+
     /** Timeline for the rotation. */
     private Timeline rotationTimeline;
 
     /** MeshView object for the 3D mesh. */
     @FXML
     private MeshView meshView;
+
     /** Group object for the 3D mesh. */
     @FXML
     private Group meshGroup;
+
     /** Menu item for the about-dialog. */
     @FXML
     private MenuItem aboutMenuItem;
+
     /** Menu item for the close button. */
     @FXML
     public MenuItem closeButton;
+
     /** Slider for the velocity. */
     @FXML
     private Slider velocitySlider;
+
     /** Text for the filename. */
     @FXML
     private Text info_filename;
+
     /** Text for the format. */
     @FXML
     private Text info_format;
+
     /** Text for the polygon count. */
     @FXML
     private Text info_polygoncount;

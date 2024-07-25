@@ -12,6 +12,8 @@ import java.util.List;
  * area of a polygon.
  * The class is implemented as a singleton.
  *
+ * @author mthiel
+ *
  * @see Polygon
  */
 public class PolygonController

@@ -15,6 +15,8 @@ public class Scanner
      * Prompts the user to enter a file name.
      *
      * @return The full file path.
+     * @Praecondition: -
+     * @Postcondition: The full file path is returned.
      */
     public String prompt()
     {

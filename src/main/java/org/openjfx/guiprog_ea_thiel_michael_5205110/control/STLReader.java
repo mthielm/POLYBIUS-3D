@@ -14,10 +14,11 @@ import java.nio.ByteOrder;
  * Implements a BufferedReader to read STL files in ASCII and binary format.
  * The class is used to parse the file and create a Polyhedron object.
  *
+ * @author mthiel
+ *
  * @see BufferedReader
  */
-public class STLReader
-{
+public class STLReader {
     /**
      * Parses an input file depending on the file format.
      *

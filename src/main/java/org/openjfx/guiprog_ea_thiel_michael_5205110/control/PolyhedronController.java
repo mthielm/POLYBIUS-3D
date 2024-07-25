@@ -16,6 +16,8 @@ import java.util.List;
  * Also provides a method to sort the polygons of a polyhedron by their area.
  * The class is implemented as a singleton.
  *
+ * @author mthiel
+ *
  * @see Polyhedron
  */
 public class PolyhedronController
@@ -45,7 +47,6 @@ public class PolyhedronController
         return instance;
     }
 
-
     /**
      * Calculates the volume of a given polyhedron.
      *
@@ -64,17 +65,17 @@ public class PolyhedronController
                 if (vertices.size() >= Constants.THREE)
                 {
                     Vector vector0 =
-                            new Vector(vertices.get(Constants.ZERO).getX(),
-                                    vertices.get(Constants.ZERO).getY(),
-                                    vertices.get(Constants.ZERO).getZ());
+                            new Vector(vertices.get(Constants.ZERO).x(),
+                                    vertices.get(Constants.ZERO).y(),
+                                    vertices.get(Constants.ZERO).z());
                     Vector vector1 =
-                            new Vector(vertices.get(Constants.ONE).getX(),
-                                    vertices.get(Constants.ONE).getY(),
-                                    vertices.get(Constants.ONE).getZ());
+                            new Vector(vertices.get(Constants.ONE).x(),
+                                    vertices.get(Constants.ONE).y(),
+                                    vertices.get(Constants.ONE).z());
                     Vector vector2 =
-                            new Vector(vertices.get(Constants.TWO).getX(),
-                                    vertices.get(Constants.TWO).getY(),
-                                    vertices.get(Constants.TWO).getZ());
+                            new Vector(vertices.get(Constants.TWO).x(),
+                                    vertices.get(Constants.TWO).y(),
+                                    vertices.get(Constants.TWO).z());
 
                     Vector crossProduct = vector1.crossProduct(vector2);
 

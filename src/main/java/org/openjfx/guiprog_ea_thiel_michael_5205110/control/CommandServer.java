@@ -13,6 +13,8 @@ import java.io.ObjectInputStream;
  * The server sends commands to the client and receives the response.
  * The server is also able to receive Polyhedrons from the client.
  *
+ * @author mthiel
+ *
  * @see Runnable
  * @see java.net.ServerSocket
  */
@@ -20,6 +22,7 @@ public class CommandServer implements Runnable
 {
     /** Port number of the server. */
     private static boolean isAccepting = false;
+
     /** Port number of the server. */
     private final int portNumber;
 

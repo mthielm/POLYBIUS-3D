@@ -9,6 +9,8 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
  * The client sends commands to the server and receives the response.
  * The client is also able to send Polyhedrons to the server.
  *
+ * @author mthiel
+ *
  * @see java.net.Socket
  * @see java.io.BufferedReader
  * @see java.io.InputStreamReader
@@ -17,6 +19,7 @@ public class CommandClient implements Runnable
 {
     /** Hostname of the server. */
     private final String hostName;
+
     /** Port number of the server. */
     private final int portNumber;
 

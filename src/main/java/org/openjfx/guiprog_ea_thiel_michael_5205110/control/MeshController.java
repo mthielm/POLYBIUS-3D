@@ -11,6 +11,8 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
  * float array, creating the faces of the polyhedron, creating the textures of
  * the polyhedron, mapping the faces and textures to an int array and finding
  * the origin of the polyhedron.
+ *
+ * @author mthiel
  */
 public class MeshController {
     /**
@@ -30,15 +32,14 @@ public class MeshController {
             Polygon polygon = polyhedron.getPolygons().get(i);
 
             for (int j = Constants.ZERO; j < Constants.THREE; j++) {
-
                 points[(i * Constants.NINE) + (j * Constants.THREE)] =
-                        polygon.getVertices().get(j).getX() *
+                        polygon.getVertices().get(j).x() *
                         Constants.ONEHUNDRED;
                 points[(i * Constants.NINE) + (j * Constants.THREE) +
-                        Constants.ONE] = polygon.getVertices().get(j).getY() *
+                        Constants.ONE] = polygon.getVertices().get(j).y() *
                         Constants.ONEHUNDRED;
                 points[(i * Constants.NINE) + (j * Constants.THREE) +
-                        Constants.TWO] = polygon.getVertices().get(j).getZ() *
+                        Constants.TWO] = polygon.getVertices().get(j).z() *
                         Constants.ONEHUNDRED;
             }
         }
@@ -56,7 +57,6 @@ public class MeshController {
     public int[] createFaces(Polyhedron polyhedron) {
         int[] faces = new int[polyhedron.getPolygons().size() * Constants.THREE];
         //Change back to *1
-
         for (int i = Constants.ZERO; i < polyhedron.getPolygons().size() *
                                          Constants.THREE; i++)
         //Change back to *1
@@ -101,7 +101,6 @@ public class MeshController {
             combinedFaces[(i * Constants.TWO) + Constants.ONE] =
                     (int) textures[i];
         }
-
         return combinedFaces;
     }
 

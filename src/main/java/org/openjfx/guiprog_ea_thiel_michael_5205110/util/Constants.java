@@ -1,5 +1,10 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.util;
 
+/**
+ * Interface for constants used in the program.
+ *
+ * @author mthiel
+ */
 public interface Constants
 {
     int ZERO = 0;
@@ -9,6 +14,7 @@ public interface Constants
     int FOUR = 4;
     int NINE = 9;
     int TEN = 10;
+    int FOURTEEN = 14;
     int FIFTEEN = 15;
     int SIXTEEN = 16;
     int TWENTY = 20;
@@ -21,16 +27,16 @@ public interface Constants
     int FOURHUNDRETTWENTY = 420;
     int FOURHUNDRETFIFTY = 450;
     int TENTHOUSAND = 10000;
+
     int BINARY_HEADER = 80;
     int BINARY_FLOAT_SIZE_BYTES = 4;
     int BINARY_UNSIGNED_INT_SIZE_BYTES = 2;
     double DEFAULT_VOLUME = 0.0;
-    double DEFAULT_ANGLE = 0.0;
-    double DEFAULT_AREA = 0.0;
     double ZERO_FIVE = 0.5;
     double SIX_ZERO = 6.0;
 
-    int PORT = 1233;
+    int PORT_SERVER = 1234;
+    int PORT_CLIENT = 1235;
     int MILLISECONDS = 1000;
 
     int SCREEN_WIDTH = 960;

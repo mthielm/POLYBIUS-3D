@@ -1,5 +1,10 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.util;
 
+/**
+ * This interface contains all literals used in the program.
+ *
+ * @author mthiel
+ */
 public interface Literals
 {
     String OPEN_PARENTHESIS = "(";
@@ -20,17 +25,11 @@ public interface Literals
     String SURFACE_AREA_PREFIX = ", surfaceArea=";
     String POLYHEDRON_SUFFIX = "}";
 
-    String SORT_BEFORE = "Vor Sortierung:";
-    String SORT_AFTER = "Nach Sortierung:";
-
     String VOLUME_CALCULATION_COMPLETE = "Finished volume calculation: ";
 
-    String AREA = "Surface Area: ";
-    String VOLUME = "Volume : ";
     String AREA_UNIT = "su (square units)";
     String VOLUME_UNIT = "cu (cubic units)";
     String INDENT = "            ";
-    String SECONDS = " seconds";
 
     String NUMBER_OF_TRIANGLES = "Number of triangles: ";
 
@@ -45,9 +44,21 @@ public interface Literals
                     ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝ ╚═════╝ ╚══════╝
                                                                               \s""";
     String GUI_TITLE = "POLYBIUS";
-    String GUI_ABOUT_MENU = "This program was made with love ♥\n...and tears and sweat and blood\n\nDeveloper: mthiel\nContact: mthiel@stud.hs-bremen.de\n.";
-    String PROMPT_FILE_NAME = "Please enter a filename [DEMO FILES: CUBE_ASCII,PYRAMID,SPHERE_750K,ALIEN]: " ;
-    String WELCOME_MESSAGE = "Welcome to POLYBIUS, the lightweight and interactive STL Viewer! Files are read in binary and ASCII format.\nInspired by the legendary 1981 arcade game, beware of its psychoactive effects. Proceed with curiosity and caution\n";
+    String GUI_ABOUT_MENU = """
+            This program was made with love ♥
+            ...and tears and sweat and blood
+
+            Developer: mthiel
+            Contact: mthiel@stud.hs-bremen.de
+            .""";
+    String PROMPT_FILE_NAME = "Please enter a filename [DEMO FILES: CUBE_ASCII" +
+            ",PYRAMID,SPHERE_750K,ALIEN]: " ;
+    String WELCOME_MESSAGE = """
+            Welcome to POLYBIUS, the lightweight and interactive STL Viewer!
+            Files are read in binary and ASCII format.
+            Inspired by the legendary 1981 arcade game, beware of its
+            psychoactive effects. Proceed with curiosity and caution
+            """;
     String ARROW = "-->";
     Character NEW_LINE = '\n';
 
@@ -94,4 +105,5 @@ public interface Literals
     String ENDFACET = "endfacet";
     String PARSING_FILE = "Parsing file: ";
     String FINISHED_SURFACE_CALCULATION = "Finished surface calculation: ";
+    String DRAWING_MESH = "Drawing Mesh...";
 }

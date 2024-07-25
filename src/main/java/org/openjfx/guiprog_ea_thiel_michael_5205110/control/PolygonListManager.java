@@ -12,12 +12,15 @@ import java.util.List;
  * PolygonConsumer-class.
  * The class is implemented as a singleton.
  *
+ * @author mthiel
+ *
  * @see List
  * @see LinkedList
  */
 public class PolygonListManager {
     /** The singleton instance of the class. */
     private static final PolygonListManager instance = new PolygonListManager();
+
     /** The list of polygons. */
     private final List<Polygon> list;
 

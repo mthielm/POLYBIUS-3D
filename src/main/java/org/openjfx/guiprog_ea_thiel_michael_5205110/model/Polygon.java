@@ -13,28 +13,23 @@ import java.util.List;
  */
 public class Polygon
 {
-    /**
-     * The list of vertices of the polygon.
-     */
-    private List<Vertex> vertices;
+    /** The list of vertices of the polygon. */
+    private final List<Vertex> vertices;
 
-    /**
-     * The list of edges of the polygon.
-     */
-    private List<Edge> edges;
+    /** The list of edges of the polygon. */
+    private final List<Edge> edges;
 
-    /**
-     * The normal of the polygon.
-     */
+    /** The normal of the polygon. */
     private Vector normal;
 
-    /**
-     * The area of the polygon.
-     */
+    /** The area of the polygon. */
     private double area;
 
     /**
      * Default constructor.
+     *
+     * @Praecondition: -
+     * @Postcondition: A new polygon object has been created.
      */
     public Polygon()
     {
@@ -48,6 +43,8 @@ public class Polygon
      * Adds a vertex to the polygon.
      *
      * @param vertex The vertex to add.
+     * @Praecondition: vertex != null.
+     * @Postcondition: The vertex has been added to the polygon.
      */
     public void addVertex(Vertex vertex)
     {
@@ -58,6 +55,8 @@ public class Polygon
      * Adds an edge to the polygon.
      *
      * @param edge The edge to add.
+     * @Praecondition: edge != null.
+     * @Postcondition: The edge has been added to the polygon.
      */
     public void addEdge(Edge edge)
     {
@@ -68,6 +67,8 @@ public class Polygon
      * Getter for the list of vertices.
      *
      * @return The list of vertices.
+     * @Praecondition: -
+     * @Postcondition: The list of vertices has been returned.
      */
     public List<Vertex> getVertices()
     {
@@ -75,49 +76,11 @@ public class Polygon
     }
 
     /**
-     * Setter for the list of vertices.
-     *
-     * @param vertices The list of vertices.
-     */
-    public void setVertices(List<Vertex> vertices)
-    {
-        this.vertices = vertices;
-    }
-
-    /**
-     * Getter for the list of edges.
-     *
-     * @return The list of edges.
-     */
-    public List<Edge> getEdges()
-    {
-        return edges;
-    }
-
-    /**
-     * Setter for the list of edges.
-     *
-     * @param edges The list of edges.
-     */
-    public void setEdges(List<Edge> edges)
-    {
-        this.edges = edges;
-    }
-
-    /**
-     * Getter for the normal of the polygon.
-     *
-     * @return The normal of the polygon.
-     */
-    public Vector getNormal()
-    {
-        return normal;
-    }
-
-    /**
      * Setter for the normal of the polygon.
      *
      * @param normal The normal of the polygon.
+     * @Praecondition: normal != null.
+     * @Postcondition: The normal of the polygon has been set.
      */
     public void setNormal(Vector normal)
     {
@@ -128,6 +91,8 @@ public class Polygon
      * Getter for the area of the polygon.
      *
      * @return The area of the polygon.
+     * @Praecondition: -
+     * @Postcondition: The area of the polygon has been returned.
      */
     public double getArea()
     {
@@ -138,6 +103,8 @@ public class Polygon
      * Setter for the area of the polygon.
      *
      * @param area The area of the polygon.
+     * @Praecondition: area >= 0.
+     * @Postcondition: The area of the polygon has been set.
      */
     public void setArea(double area)
     {
@@ -146,8 +113,11 @@ public class Polygon
 
     /**
      * Returns the polygon as a string.
+     * Overrides the toString method of the Object class.
      *
      * @return The polygon as a string.
+     * @Praecondition: -
+     * @Postcondition: The polygon has been returned as a string.
      */
     @Override
     public String toString()

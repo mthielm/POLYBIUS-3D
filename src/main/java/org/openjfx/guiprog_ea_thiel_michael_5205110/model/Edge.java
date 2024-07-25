@@ -9,21 +9,19 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
  */
 public class Edge
 {
-    /**
-     * The start vertex of the edge.
-     */
-    private Vertex start;
+    /** The start vertex of the edge. */
+    private final Vertex start;
 
-    /**
-     * The end vertex of the edge.
-     */
-    private Vertex end;
+    /** The end vertex of the edge. */
+    private final Vertex end;
 
     /**
      * Default constructor.
      *
      * @param start The start vertex of the edge.
      * @param end  The end vertex of the edge.
+     * @Praecondition: start != null && end != null.
+     * @Postcondition: this.start == start && this.end == end.
      */
     public Edge(Vertex start, Vertex end)
     {
@@ -32,49 +30,12 @@ public class Edge
     }
 
     /**
-     * Getter for the start vertex.
-     *
-     * @return The start vertex of the edge.
-     */
-    public Vertex getStart()
-    {
-        return start;
-    }
-
-    /**
-     * Getter for the end vertex.
-     *
-     * @return The end vertex of the edge.
-     */
-    public Vertex getEnd()
-    {
-        return end;
-    }
-
-    /**
-     * Setter for the start vertex.
-     *
-     * @param start The start vertex of the edge.
-     */
-    public void setStart(Vertex start)
-    {
-        this.start = start;
-    }
-
-    /**
-     * Setter for the end vertex.
-     *
-     * @param end The end vertex of the edge.
-     */
-    public void setEnd(Vertex end)
-    {
-        this.end = end;
-    }
-
-    /**
      * Returns the Edge as a string representation.
+     * Overrides the default toString method.
      *
      * @return The Edge as a string representation.
+     * @Praecondition: true.
+     * @Postcondition: result != null.
      */
     @Override
     public String toString()

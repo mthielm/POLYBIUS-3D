@@ -7,6 +7,8 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 /**
  * This class is responsible for calculating the surface area of a polygon.
+ *
+ * @author mthiel
  */
 public class SurfaceCalculatorThread extends Thread {
     /** The surface area of the polygon. */
