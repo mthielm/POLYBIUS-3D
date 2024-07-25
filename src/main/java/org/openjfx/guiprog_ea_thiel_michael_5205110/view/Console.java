@@ -11,7 +11,7 @@ public class Console
      * Logs a message to the console.
      *
      * @param msg The message to log.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: Message is logged to the console.
      */
     public static void log(String msg)

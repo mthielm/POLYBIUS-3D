@@ -20,7 +20,7 @@ public class Edge
      *
      * @param start The start vertex of the edge.
      * @param end  The end vertex of the edge.
-     * @Praecondition: start != null && end != null.
+     * @Precondition: start != null && end != null.
      * @Postcondition: this.start == start && this.end == end.
      */
     public Edge(Vertex start, Vertex end)
@@ -34,7 +34,7 @@ public class Edge
      * Overrides the default toString method.
      *
      * @return The Edge as a string representation.
-     * @Praecondition: true.
+     * @Precondition: true.
      * @Postcondition: result != null.
      */
     @Override

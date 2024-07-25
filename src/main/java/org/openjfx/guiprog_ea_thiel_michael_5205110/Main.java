@@ -25,7 +25,7 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
  *
  * @author mthiel
  * @version 1.0
- * @Date: 2021-07-15
+ * @Date: 2024-07-31
  */
 public class Main
 {
@@ -35,7 +35,7 @@ public class Main
      * Parses the file and initializes the GUI. Opens a connection for Peer2Peer.
      *
      * @param args Command line arguments
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: Program is running.
      */
     public static void main(String[] args)

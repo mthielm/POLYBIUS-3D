@@ -28,7 +28,7 @@ public class Polygon
     /**
      * Default constructor.
      *
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: A new polygon object has been created.
      */
     public Polygon()
@@ -43,7 +43,7 @@ public class Polygon
      * Adds a vertex to the polygon.
      *
      * @param vertex The vertex to add.
-     * @Praecondition: vertex != null.
+     * @Precondition: vertex != null.
      * @Postcondition: The vertex has been added to the polygon.
      */
     public void addVertex(Vertex vertex)
@@ -55,7 +55,7 @@ public class Polygon
      * Adds an edge to the polygon.
      *
      * @param edge The edge to add.
-     * @Praecondition: edge != null.
+     * @Precondition: edge != null.
      * @Postcondition: The edge has been added to the polygon.
      */
     public void addEdge(Edge edge)
@@ -67,7 +67,7 @@ public class Polygon
      * Getter for the list of vertices.
      *
      * @return The list of vertices.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The list of vertices has been returned.
      */
     public List<Vertex> getVertices()
@@ -79,7 +79,7 @@ public class Polygon
      * Setter for the normal of the polygon.
      *
      * @param normal The normal of the polygon.
-     * @Praecondition: normal != null.
+     * @Precondition: normal != null.
      * @Postcondition: The normal of the polygon has been set.
      */
     public void setNormal(Vector normal)
@@ -91,7 +91,7 @@ public class Polygon
      * Getter for the area of the polygon.
      *
      * @return The area of the polygon.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The area of the polygon has been returned.
      */
     public double getArea()
@@ -103,7 +103,7 @@ public class Polygon
      * Setter for the area of the polygon.
      *
      * @param area The area of the polygon.
-     * @Praecondition: area >= 0.
+     * @Precondition: area >= 0.
      * @Postcondition: The area of the polygon has been set.
      */
     public void setArea(double area)
@@ -116,7 +116,7 @@ public class Polygon
      * Overrides the toString method of the Object class.
      *
      * @return The polygon as a string.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The polygon has been returned as a string.
      */
     @Override

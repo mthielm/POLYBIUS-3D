@@ -17,7 +17,7 @@ public record Vertex(float x, float y, float z) {
      * @param x The x-coordinate of the vertex.
      * @param y The y-coordinate of the vertex.
      * @param z The z-coordinate of the vertex.
-     * @Praecondition: x, y, z are float values.
+     * @Precondition: x, y, z are float values.
      * @Postcondition: A new Vertex object is created with the given x, y, z
      * values.
      */
@@ -29,7 +29,7 @@ public record Vertex(float x, float y, float z) {
      * Overrides the default x method.
      *
      * @return The x-coordinate of the vertex.
-     * @Praecondition: x is a float value.
+     * @Precondition: x is a float value.
      * @Postcondition: The x-coordinate of the vertex is returned.
      */
     @Override
@@ -42,7 +42,7 @@ public record Vertex(float x, float y, float z) {
      * Overrides the default y method.
      *
      * @return The y-coordinate of the vertex.
-     * @Praecondition: y is a float value.
+     * @Precondition: y is a float value.
      * @Postcondition: The y-coordinate of the vertex is returned.
      */
     @Override
@@ -55,7 +55,7 @@ public record Vertex(float x, float y, float z) {
      * Overrides the default z method.
      *
      * @return The z-coordinate of the vertex.
-     * @Praecondition: z is a float value.
+     * @Precondition: z is a float value.
      * @Postcondition: The z-coordinate of the vertex is returned.
      */
     @Override
@@ -68,7 +68,7 @@ public record Vertex(float x, float y, float z) {
      * Overrides the default toString method.
      *
      * @return A string representation of the vertex.
-     * @Praecondition: x, y, z are float values.
+     * @Precondition: x, y, z are float values.
      * @Postcondition: A string representation of the vertex is returned.
      */
     @Override

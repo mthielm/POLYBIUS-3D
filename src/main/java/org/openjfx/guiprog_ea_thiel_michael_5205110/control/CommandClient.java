@@ -28,8 +28,8 @@ public class CommandClient implements Runnable
      *
      * @param hostName Hostname of the server.
      * @param portNumber Port number of the server.
+     * @Precondition: hostName is not null, portNumber is greater than 0.
      * @Postcondition: The CommandClient is initialized.
-     * @Praecondition: hostName is not null, portNumber is greater than 0.
      */
     public CommandClient(String hostName, int portNumber)
     {
@@ -41,8 +41,8 @@ public class CommandClient implements Runnable
      * Method to run the client.
      * Opens a socket to the server and sends commands to the server.
      *
+     * @Precondition: The server is running.
      * @Postcondition: The client is running.
-     * @Praecondition: The server is running.
      */
     @Override
     public void run()
@@ -54,8 +54,8 @@ public class CommandClient implements Runnable
      * Method to open a socket to the server.
      *
      * @return The socket to the server.
+     * @Precondition: The server is running.
      * @Postcondition: A socket to the server is opened.
-     * @Praecondition: The server is running.
      */
     private java.net.Socket openSocket()
     {
@@ -73,8 +73,8 @@ public class CommandClient implements Runnable
      * Method to read and send commands to the server.
      *
      * @param socket The socket to the server.
+     * @Precondition: The server is running.
      * @Postcondition: The client sends commands to the server.
-     * @Praecondition: The server is running.
      */
     private void readAndSend(java.net.Socket socket)
     {

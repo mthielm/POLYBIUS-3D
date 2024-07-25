@@ -28,7 +28,7 @@ public class PolyhedronViewer extends Application
      * class.
      *
      * @param args Command line arguments.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: Program is running.
      */
     public static void main(String[] args)
@@ -44,7 +44,7 @@ public class PolyhedronViewer extends Application
      *
      * @param stage The stage to display the GUI.
      * @throws IOException If the FXML file cannot be loaded.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: GUI is displayed.
      */
     @Override

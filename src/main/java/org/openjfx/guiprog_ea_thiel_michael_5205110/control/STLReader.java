@@ -24,6 +24,7 @@ public class STLReader {
      *
      * @param file The input file selected through the user prompt.
      * @return The Polyhedron object.
+     * @Precondition: The input file is not null.
      * @Postcondition: The Polyhedron object is created from the input file.
      * @Postcondition: The Polyhedron object is returned.
      */
@@ -54,8 +55,8 @@ public class STLReader {
      * @param fileName The input file selected through the user prompt.
      * @return The Polyhedron object.
      * @throws IOException If an I/O error occurs.
+     * @Precondition: The input file is in ASCII format.
      * @Postcondition: The Polyhedron object is created from the input file.
-     * @Praecondition: The input file is in ASCII format.
      */
     public static Polyhedron readASCII(String fileName) throws IOException
     {
@@ -134,8 +135,8 @@ public class STLReader {
      * @param file The input file selected through the user prompt.
      * @return The Polyhedron object.
      * @throws IOException If an I/O error occurs.
+     * @Precondition: The input file is in binary format.
      * @Postcondition: The Polyhedron object is created from the input file.
-     * @Praecondition: The input file is in binary format.
      */
     private static Polyhedron readBinary(String file) throws IOException
     {
@@ -207,8 +208,8 @@ public class STLReader {
      * @param inputStream The input stream.
      * @return The resulting float value.
      * @throws IOException If an I/O error occurs.
+     * @Precondition: The input stream is not null.
      * @Postcondition: The 4 bytes are read from the input stream.
-     * @Praecondition: The input stream is not null.
      */
     private static float readFloat(DataInputStream inputStream) throws IOException
     {
@@ -224,8 +225,8 @@ public class STLReader {
      * @return True if the file is in ASCII format,
      *         False if it is in binary format.
      * @throws IOException If an I/O error occurs.
+     * @Precondition: The input stream is not null.
      * @Postcondition: The header of the input file is read.
-     * @Praecondition: The input stream is not null.
      */
     private static boolean isASCII(DataInputStream data) throws IOException
     {

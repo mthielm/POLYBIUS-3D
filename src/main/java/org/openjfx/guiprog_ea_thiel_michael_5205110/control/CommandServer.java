@@ -30,8 +30,8 @@ public class CommandServer implements Runnable
      * Constructor of the CommandServer.
      *
      * @param portNumber Port number of the server.
+     * @Precondition: The port number is a valid port number.
      * @Postcondition: The CommandServer is created with the given port number.
-     * @Praecondition: The port number is a valid port number.
      */
     public CommandServer(int portNumber)
     {
@@ -42,8 +42,8 @@ public class CommandServer implements Runnable
      * Method to check if the server is accepting connections.
      *
      * @return True if the server is accepting connections, false otherwise.
+     * @Precondition: The server is running.
      * @Postcondition: The server is checked if it is accepting connections.
-     * @Praecondition: The server is running.
      */
     public static boolean isAccepting()
     {
@@ -55,8 +55,8 @@ public class CommandServer implements Runnable
      * Overrides the run method of the Runnable interface.
      * Opens a socket to the client and receives commands from the client.
      *
+     * @Precondition: The server is created.
      * @Postcondition: The server is running.
-     * @Praecondition: The server is created.
      */
     @Override
     public void run()
@@ -92,8 +92,8 @@ public class CommandServer implements Runnable
      * Reads the commands from the client and sends them to the GUI.
      *
      * @param client The client to serve.
+     * @Precondition: The client is connected.
      * @Postcondition: The client is served.
-     * @Praecondition: The client is connected.
      */
     private void serveClient(java.net.Socket client)
     {
@@ -135,8 +135,8 @@ public class CommandServer implements Runnable
      *
      * @param client The client to receive the Polyhedron from.
      * @return The Polyhedron received from the client.
+     * @Precondition: The client is connected.
      * @Postcondition: The Polyhedron is received from the client.
-     * @Praecondition: The client is connected.
      */
     public Polyhedron receivePolyhedron(java.net.Socket client) {
         try {

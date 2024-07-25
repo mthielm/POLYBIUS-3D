@@ -25,8 +25,8 @@ public class Timer
      * Divides result by 1000 to get seconds.
      *
      * @return The runtime of the timer in seconds.
+     * @Precondition: Timer has been started.
      * @Postcondition: -
-     * @Praecondition: Timer has been started.
      */
     public String getRuntime()
     {

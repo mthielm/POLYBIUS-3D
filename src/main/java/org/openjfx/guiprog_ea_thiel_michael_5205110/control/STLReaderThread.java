@@ -21,8 +21,8 @@ public class STLReaderThread extends Thread {
      * Constructor for the STLReaderThread.
      *
      * @param file The file to be read.
+     * @Precondition: file is not null.
      * @Postcondition: A new STLReaderThread is created with the given file.
-     * @Praecondition: file is not null.
      */
     public STLReaderThread(String file) {
         this.file = file;
@@ -31,8 +31,8 @@ public class STLReaderThread extends Thread {
     /**
      * Reads the file and creates a polyhedron from it.
      *
+     * @Precondition: The file is a valid STL file.
      * @Postcondition: The polyhedron is created from the file.
-     * @Praecondition: The file is a valid STL file.
      */
     @Override
     public void run() {
@@ -46,8 +46,8 @@ public class STLReaderThread extends Thread {
      * Returns the polyhedron that was created from the file.
      *
      * @return The polyhedron that was created from the file.
+     * @Precondition: The polyhedron is not null.
      * @Postcondition: The polyhedron is returned.
-     * @Praecondition: The polyhedron is not null.
      */
     public Polyhedron getPolyhedron()
     {

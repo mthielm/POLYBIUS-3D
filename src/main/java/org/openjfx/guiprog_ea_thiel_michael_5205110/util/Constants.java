@@ -1,7 +1,7 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.util;
 
 /**
- * Interface for constants used in the program.
+ * Interface for all constants used in the program.
  *
  * @author mthiel
  */

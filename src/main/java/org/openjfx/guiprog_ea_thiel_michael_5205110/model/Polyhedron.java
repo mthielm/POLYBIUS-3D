@@ -25,7 +25,7 @@ public class Polyhedron
     /**
      * Default constructor.
      *
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The list of polygons is initialized.
      */
     public Polyhedron()
@@ -37,7 +37,7 @@ public class Polyhedron
      * Adds a polygon to the polyhedron.
      *
      * @param polygon The polygon to add.
-     * @Praecondition: polygon != null.
+     * @Precondition: polygon != null.
      * @Postcondition: The polygon is added to the list of polygons.
      */
     public void addPolygon(Polygon polygon)
@@ -49,7 +49,7 @@ public class Polyhedron
      * Getter for the list of polygons.
      *
      * @return The list of polygons in the polyhedron.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The list of polygons is returned.
      */
     public List<Polygon> getPolygons()
@@ -61,7 +61,7 @@ public class Polyhedron
      * Setter for the number of polygons.
      *
      * @param numPolygons The number of polygons to set.
-     * @Praecondition: numPolygons >= 0.
+     * @Precondition: numPolygons >= 0.
      * @Postcondition: The number of polygons is set.
      */
     public void setNumPolygons(int numPolygons)
@@ -74,7 +74,7 @@ public class Polyhedron
      * Overrides the toString method of the Object class.
      *
      * @return The polyhedron as a string.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The polyhedron is returned as a string.
      */
     @Override

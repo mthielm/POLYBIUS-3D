@@ -26,7 +26,7 @@ public class FileInfo
     /**
      * Default private Constructor.
      *
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The instance of the class is created.
      */
     private FileInfo()
@@ -36,7 +36,7 @@ public class FileInfo
      * Returns the singleton instance of the class.
      *
      * @return The singleton instance of the class.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The instance of the class is returned.
      */
     public static FileInfo getInstance()
@@ -48,7 +48,7 @@ public class FileInfo
      * Returns the name of the file.
      *
      * @return The name of the file.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The name of the file is returned.
      */
     public String getFileName()
@@ -60,7 +60,7 @@ public class FileInfo
      * Returns the format of the file.
      *
      * @return The format of the file.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The format of the file is returned.
      */
     public String getFileFormat()
@@ -72,7 +72,7 @@ public class FileInfo
      * Returns the number of polygons in the file.
      *
      * @return The number of polygons in the file.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The number of polygons in the file is returned.
      */
     public String getPolygonCount()
@@ -84,7 +84,7 @@ public class FileInfo
      * Sets the name of the file.
      *
      * @param fileName The name of the file.
-     * @Praecondition: fileName != null.
+     * @Precondition: fileName != null.
      * @Postcondition: The name of the file is set.
      */
     public void setFileName(String fileName)
@@ -96,7 +96,7 @@ public class FileInfo
      * Sets the format of the file.
      *
      * @param fileFormat The format of the file.
-     * @Praecondition: fileFormat != null.
+     * @Precondition: fileFormat != null.
      * @Postcondition: The format of the file is set.
      */
     public void setFileFormat(String fileFormat)
@@ -108,7 +108,7 @@ public class FileInfo
      * Sets the number of polygons in the file.
      *
      * @param polygonCount The number of polygons in the file.
-     * @Praecondition: polygonCount >= 0.
+     * @Precondition: polygonCount >= 0.
      * @Postcondition: The number of polygons in the file is set.
      */
     public void setPolygonCount(int polygonCount)

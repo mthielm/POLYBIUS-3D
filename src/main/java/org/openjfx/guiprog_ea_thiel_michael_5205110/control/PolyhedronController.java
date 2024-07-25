@@ -29,8 +29,8 @@ public class PolyhedronController
     /**
      * Default private Constructor.
      *
+     * @Precondition: -
      * @Postcondition: The instance of the class is initialized.
-     * @Praecondition: -
      */
     private PolyhedronController()
     {}
@@ -40,7 +40,7 @@ public class PolyhedronController
      *
      * @return The singleton instance of the class.
      * @Postcondition: The instance of the class is returned.
-     * @Praecondition: -
+     * @Precondition: -
      */
     public static PolyhedronController getInstance()
     {
@@ -51,8 +51,8 @@ public class PolyhedronController
      * Calculates the volume of a given polyhedron.
      *
      * @param polyhedron The polyhedron for which the volume is to be calculated.
+     * @Precondition: The polyhedron is not null.
      * @Postcondition: The volume of the polyhedron is calculated and printed to the console.
-     * @Praecondition: The polyhedron is not null.
      */
     public void calculateVolume(Polyhedron polyhedron)
     {

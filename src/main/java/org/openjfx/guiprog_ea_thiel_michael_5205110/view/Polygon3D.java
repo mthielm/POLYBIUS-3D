@@ -17,7 +17,7 @@ public class Polygon3D extends TriangleMesh {
     /**
      * Private constructor of the Polygon3D class.
      *
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: A new instance of the Polygon3D class is created.
      */
     public void setupMesh(float[] points, float[] texCoords, int[] faces)
@@ -32,7 +32,7 @@ public class Polygon3D extends TriangleMesh {
      * Returns the singleton instance of the Polygon3D class.
      *
      * @return The singleton instance of the Polygon3D class.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: The singleton instance of the Polygon3D class is returned.
      */
     public static Polygon3D getInstance()

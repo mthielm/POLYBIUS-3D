@@ -1,7 +1,7 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.util;
 
 /**
- * This interface contains all literals used in the program.
+ * Interface for all general literals and messages used in the program.
  *
  * @author mthiel
  */

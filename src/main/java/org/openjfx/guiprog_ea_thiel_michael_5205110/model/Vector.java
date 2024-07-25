@@ -22,7 +22,7 @@ public class Vector
     /**
      * Default constructor.
      *
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The vector is initialized with 0.
      */
     public Vector()
@@ -38,7 +38,7 @@ public class Vector
      * @param x The x-coordinate of the vector.
      * @param y The y-coordinate of the vector.
      * @param z The z-coordinate of the vector.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The vector is initialized with the given coordinates.
      */
     public Vector(float x, float y, float z)
@@ -52,7 +52,7 @@ public class Vector
      * Constructor with a vertex as parameter.
      *
      * @param vertex The vertex to create the vector from.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The vector is initialized with the coordinates of the
      *                 vertex.
      */
@@ -68,7 +68,7 @@ public class Vector
      *
      * @param v The vector to calculate the cross product with.
      * @return The cross product of the two vectors.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The cross product of the two vectors is calculated.
      */
     public Vector crossProduct(Vector v)
@@ -83,7 +83,7 @@ public class Vector
      *
      * @param v The vector to calculate the dot product with.
      * @return The dot product of the two vectors.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The dot product of the two vectors is calculated.
      */
     public float dotProduct(Vector v)
@@ -95,7 +95,7 @@ public class Vector
      * Calculates the magnitude of the vector.
      *
      * @return The magnitude of the vector.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The magnitude of the vector is calculated.
      */
     public float magnitude()
@@ -108,7 +108,7 @@ public class Vector
      *
      * @param vector The vector to subtract.
      * @return The result of the subtraction.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The result of the subtraction is calculated.
      */
     public Vector subtract(Vector vector)
@@ -122,7 +122,7 @@ public class Vector
      * Getter for the x-coordinate.
      *
      * @return The x-coordinate of the vector.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The x-coordinate of the vector is returned.
      */
     public float getX()
@@ -134,7 +134,7 @@ public class Vector
      * Getter for the y-coordinate.
      *
      * @return The y-coordinate of the vector.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The y-coordinate of the vector is returned.
      */
     public float getY()
@@ -146,7 +146,7 @@ public class Vector
      * Getter for the z-coordinate.
      *
      * @return The z-coordinate of the vector.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The z-coordinate of the vector is returned.
      */
     public float getZ()
@@ -159,7 +159,7 @@ public class Vector
      * Overrides the toString method of the Object class.
      *
      * @return The vector as a string.
-     * @Praecondition: None.
+     * @Precondition: None.
      * @Postcondition: The vector is returned as a string.
      */
     @Override

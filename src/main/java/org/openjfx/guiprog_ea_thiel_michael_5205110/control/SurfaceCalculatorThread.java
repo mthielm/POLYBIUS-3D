@@ -18,8 +18,8 @@ public class SurfaceCalculatorThread extends Thread {
      * The run method of the thread.
      * Overrides the run method of the Thread class.
      *
+     * @Precondition: The polygon list is not empty.
      * @Postcondition: The surface area of the polygon is calculated.
-     * @Praecondition: The polygon list is not empty.
      */
     @Override
     public void run() {

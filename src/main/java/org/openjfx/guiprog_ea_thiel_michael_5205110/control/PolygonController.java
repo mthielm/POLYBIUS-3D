@@ -24,8 +24,8 @@ public class PolygonController
     /**
      * Default private Constructor.
      *
+     * @Precondition: -
      * @Postcondition: The singleton instance of the class is created.
-     * @Praecondition: -
      */
     private PolygonController()
     {}
@@ -34,8 +34,8 @@ public class PolygonController
      * Returns the singleton instance of the class.
      *
      * @return The singleton instance of the class.
+     * @Precondition: -
      * @Postcondition: The singleton instance of the class is returned.
-     * @Praecondition: -
      */
     public static PolygonController getInstance()
     {
@@ -46,8 +46,8 @@ public class PolygonController
      * Calculates the area of a polygon.
      *
      * @param polygon The polygon for which the area is to be calculated.
+     * @Precondition: The polygon is not null.
      * @Postcondition: The area of the polygon is calculated and set.
-     * @Praecondition: The polygon is not null.
      */
     public void calculateArea(Polygon polygon)
     {

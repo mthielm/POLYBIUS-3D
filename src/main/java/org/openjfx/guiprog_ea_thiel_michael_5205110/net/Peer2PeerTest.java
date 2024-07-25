@@ -23,7 +23,7 @@ public class Peer2PeerTest {
      * Main method of the program. Starts the Peer2Peer test.
      *
      * @param args Command line arguments.
-     * @Praecondition: -
+     * @Precondition: -
      * @Postcondition: Program is running.
      */
     public static void main(String[] args) {
