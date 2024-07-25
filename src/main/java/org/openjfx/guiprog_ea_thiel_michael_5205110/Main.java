@@ -13,6 +13,7 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
 
 // ToDo: control-package -> check comments and warnings!
+// ToDo: Java-Docs -> @post, @pre
 /**
  * Main class of the program. Initializes the program and starts the GUI.
  *

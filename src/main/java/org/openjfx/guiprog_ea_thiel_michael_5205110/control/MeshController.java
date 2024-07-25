@@ -13,6 +13,14 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
  * the origin of the polyhedron.
  */
 public class MeshController {
+    /**
+     * A method to create a new instance of the class.
+     *
+     * @param polyhedron The polyhedron to map the points for.
+     * @return A new instance of the class.
+     * @Postcondition: A new instance of the class is created.
+     * @Praecondition: The polyhedron is not null.
+     */
     public float[] mapPoints(Polyhedron polyhedron) {
         Console.log(Literals.MAPPING_POINTS);
         float[] points =
@@ -42,6 +50,8 @@ public class MeshController {
      *
      * @param polyhedron The polyhedron to create the faces for.
      * @return The faces of the polyhedron.
+     * @Postcondition: The faces of the polyhedron are created.
+     * @Praecondition: The polyhedron is not null.
      */
     public int[] createFaces(Polyhedron polyhedron) {
         int[] faces = new int[polyhedron.getPolygons().size() * Constants.THREE];
@@ -61,6 +71,8 @@ public class MeshController {
      *
      * @param polyhedron The polyhedron to create the textures for.
      * @return The textures of the polyhedron.
+     * @Postcondition: The textures of the polyhedron are created.
+     * @Praecondition: The polyhedron is not null.
      */
     public float[] createTextures(Polyhedron polyhedron) {
         float[] textures =
@@ -78,6 +90,8 @@ public class MeshController {
      * @param faces The faces of the polyhedron.
      * @param textures The textures of the polyhedron.
      * @return The combined faces and textures.
+     * @Postcondition: The faces and textures are mapped to an int array.
+     * @Praecondition: The faces and textures are not null.
      */
     public int[] mapFaces(int[] faces, float[] textures) {
         int[] combinedFaces = new int[faces.length * Constants.TWO];
@@ -96,6 +110,8 @@ public class MeshController {
      *
      * @param points The points of the polyhedron.
      * @return The origin of the polyhedron.
+     * @Postcondition: The origin of the polyhedron is found.
+     * @Praecondition: The points are not null.
      */
     public double[] findOrigin(float[] points) {
         double sumX = Constants.ZERO;

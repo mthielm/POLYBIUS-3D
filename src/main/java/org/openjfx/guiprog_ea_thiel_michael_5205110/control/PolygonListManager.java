@@ -12,20 +12,20 @@ import java.util.List;
  * PolygonConsumer-class.
  * The class is implemented as a singleton.
  *
- * @see Polygon
+ * @see List
+ * @see LinkedList
  */
 public class PolygonListManager {
-    /**
-     * The singleton instance of the class.
-     */
+    /** The singleton instance of the class. */
     private static final PolygonListManager instance = new PolygonListManager();
-    /**
-     * The list of polygons.
-     */
+    /** The list of polygons. */
     private final List<Polygon> list;
 
     /**
      * Default private Constructor.
+     *
+     * @Postcondition: The list is initialized as a new LinkedList.
+     * @Praecondition: -
      */
     private PolygonListManager() {
         list = new LinkedList<>();
@@ -35,6 +35,8 @@ public class PolygonListManager {
      * Returns the singleton instance of the class.
      *
      * @return The singleton instance of the class.
+     * @Postcondition: The singleton instance of the class is returned
+     * @Praecondition: -
      */
     public static synchronized PolygonListManager getInstance() {
         return instance;
@@ -44,6 +46,8 @@ public class PolygonListManager {
      * Adds a polygon to the list.
      *
      * @param polygon The polygon to be added.
+     * @Postcondition: The polygon is added to the list.
+     * @Praecondition: The polygon is not null.
      */
     public synchronized void addPolygon(Polygon polygon) {
         list.add(polygon);
@@ -55,6 +59,8 @@ public class PolygonListManager {
      * Removes and returns the first polygon from the list.
      *
      * @return The first polygon from the list.
+     * @Postcondition: The first polygon from the list is removed and returned.
+     * @Praecondition: The list is not empty.
      */
     public synchronized Polygon getAndRemovePolygon() {
         while (list.isEmpty()) {

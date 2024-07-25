@@ -17,19 +17,18 @@ import java.util.List;
  * The class is implemented as a singleton.
  *
  * @see Polyhedron
- *
- * @author mthiel
  */
 public class PolyhedronController
 {
-    /**
-     * The singleton instance of the class.
-     */
+    /** The singleton instance of the class. */
     private static final PolyhedronController instance =
             new PolyhedronController();
 
     /**
      * Default private Constructor.
+     *
+     * @Postcondition: The instance of the class is initialized.
+     * @Praecondition: -
      */
     private PolyhedronController()
     {}
@@ -38,6 +37,8 @@ public class PolyhedronController
      * Returns the singleton instance of the class.
      *
      * @return The singleton instance of the class.
+     * @Postcondition: The instance of the class is returned.
+     * @Praecondition: -
      */
     public static PolyhedronController getInstance()
     {
@@ -49,6 +50,8 @@ public class PolyhedronController
      * Calculates the volume of a given polyhedron.
      *
      * @param polyhedron The polyhedron for which the volume is to be calculated.
+     * @Postcondition: The volume of the polyhedron is calculated and printed to the console.
+     * @Praecondition: The polyhedron is not null.
      */
     public void calculateVolume(Polyhedron polyhedron)
     {

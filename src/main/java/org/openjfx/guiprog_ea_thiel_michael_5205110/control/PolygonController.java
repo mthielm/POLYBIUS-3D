@@ -13,18 +13,17 @@ import java.util.List;
  * The class is implemented as a singleton.
  *
  * @see Polygon
- *
- * @author mthiel
  */
 public class PolygonController
 {
-    /**
-     * The singleton instance of the class.
-     */
+    /** The singleton instance of the class. */
     private static final PolygonController instance = new PolygonController();
 
     /**
      * Default private Constructor.
+     *
+     * @Postcondition: The singleton instance of the class is created.
+     * @Praecondition: -
      */
     private PolygonController()
     {}
@@ -33,6 +32,8 @@ public class PolygonController
      * Returns the singleton instance of the class.
      *
      * @return The singleton instance of the class.
+     * @Postcondition: The singleton instance of the class is returned.
+     * @Praecondition: -
      */
     public static PolygonController getInstance()
     {
@@ -43,6 +44,8 @@ public class PolygonController
      * Calculates the area of a polygon.
      *
      * @param polygon The polygon for which the area is to be calculated.
+     * @Postcondition: The area of the polygon is calculated and set.
+     * @Praecondition: The polygon is not null.
      */
     public void calculateArea(Polygon polygon)
     {

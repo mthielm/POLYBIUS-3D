@@ -12,22 +12,23 @@ import java.io.ObjectInputStream;
  * Class to receive commands from the server.
  * The server sends commands to the client and receives the response.
  * The server is also able to receive Polyhedrons from the client.
+ *
+ * @see Runnable
+ * @see java.net.ServerSocket
  */
 public class CommandServer implements Runnable
 {
-    /**
-     * Port number of the server
-     */
+    /** Port number of the server. */
     private static boolean isAccepting = false;
-    /**
-     * Port number of the server
-     */
+    /** Port number of the server. */
     private final int portNumber;
 
     /**
-     * Constructor of the CommandServer
+     * Constructor of the CommandServer.
      *
-     * @param portNumber Port number of the server
+     * @param portNumber Port number of the server.
+     * @Postcondition: The CommandServer is created with the given port number.
+     * @Praecondition: The port number is a valid port number.
      */
     public CommandServer(int portNumber)
     {
@@ -37,7 +38,9 @@ public class CommandServer implements Runnable
     /**
      * Method to check if the server is accepting connections.
      *
-     * @return True if the server is accepting connections, false otherwise
+     * @return True if the server is accepting connections, false otherwise.
+     * @Postcondition: The server is checked if it is accepting connections.
+     * @Praecondition: The server is running.
      */
     public static boolean isAccepting()
     {
@@ -46,7 +49,11 @@ public class CommandServer implements Runnable
 
     /**
      * Method to run the server.
+     * Overrides the run method of the Runnable interface.
      * Opens a socket to the client and receives commands from the client.
+     *
+     * @Postcondition: The server is running.
+     * @Praecondition: The server is created.
      */
     @Override
     public void run()
@@ -81,7 +88,9 @@ public class CommandServer implements Runnable
      * Method to serve the client.
      * Reads the commands from the client and sends them to the GUI.
      *
-     * @param client The client to serve
+     * @param client The client to serve.
+     * @Postcondition: The client is served.
+     * @Praecondition: The client is connected.
      */
     private void serveClient(java.net.Socket client)
     {
@@ -121,8 +130,10 @@ public class CommandServer implements Runnable
     /**
      * Method to receive a Polyhedron from the client.
      *
-     * @param client The client to receive the Polyhedron from
-     * @return The Polyhedron received from the client
+     * @param client The client to receive the Polyhedron from.
+     * @return The Polyhedron received from the client.
+     * @Postcondition: The Polyhedron is received from the client.
+     * @Praecondition: The client is connected.
      */
     public Polyhedron receivePolyhedron(java.net.Socket client) {
         try {

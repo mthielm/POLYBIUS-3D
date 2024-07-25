@@ -37,19 +37,21 @@ import static javafx.scene.transform.Rotate.*;
  * Controller class for the GUI. Handles the GUI events and updates the GUI.
  * The GUIController class is a singleton class.
  * The GUIController class is the main controller class for the GUI.
- * The GUIController class is responsible for handling the GUI events and updating the GUI.
+ * The GUIController class is responsible for handling the GUI events and
+ * updating the GUI.
  *
  * @see javafx.fxml.Initializable
  */
 public class GUIController implements Initializable
 {
-    /**
-     * Singleton instance of the GUIController
-     */
+    /** Singleton instance of the GUIController. */
     private static GUIController instance = null;
 
     /**
-     * Constructor of the GUIController
+     * Constructor of the GUIController.
+     *
+     * @Postcondition: The instance of the GUIController is set to this.
+     * @Praecondition: The instance of the GUIController is null.
      */
     public GUIController()
     {
@@ -58,102 +60,66 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to get the instance of the GUIController
+     * Method to get the instance of the GUIController.
      *
-     * @return The instance of the GUIController
+     * @return The instance of the GUIController.
+     * @Postcondition: The instance of the GUIController is returned.
+     * @Praecondition: The instance of the GUIController is not null.
      */
     public static GUIController getInstance() {
         return instance;
     }
 
-    /**
-     * Anchor points for the rotation
-     */
+    /** Anchor points for the rotation. */
     double anchorX;
-    /**
-     * Anchor points for the rotation
-     */
+    /** Anchor points for the rotation. */
     double anchorY;
-    /**
-     * Rotation speed of the mesh
-     */
+    /** Rotation speed of the mesh. */
     private double rotationSpeed = Constants.ONE;
-    /**
-     * Anchor angles for the rotation
-     */
+    /** Anchor angles for the rotation. */
     private double anchorAngleX = Constants.ZERO;
-    /**
-     * Anchor angles for the rotation
-     */
+    /** Anchor angles for the rotation. */
     private double anchorAngleY = Constants.ZERO;
-
-    /**
-     * Pivot points for the rotation
-     */
+    /** Pivot points for the rotation. */
     double pivotX;
-    /**
-     * Pivot points for the rotation
-     */
+    /** Pivot points for the rotation. */
     double pivotY;
-    /**
-     * Pivot points for the rotation
-     */
+    /** Pivot points for the rotation. */
     double pivotZ;
-    /**
-     * Timeline for the rotation
-     */
+    /** Timeline for the rotation. */
     private Timeline rotationTimeline;
 
-    /**
-     * MeshView object for the 3D mesh
-     */
+    /** MeshView object for the 3D mesh. */
     @FXML
     private MeshView meshView;
-
-    /**
-     * Group object for the 3D mesh
-     */
+    /** Group object for the 3D mesh. */
     @FXML
     private Group meshGroup;
-
-    /**
-     * Menu item for the about-dialog
-     */
+    /** Menu item for the about-dialog. */
     @FXML
     private MenuItem aboutMenuItem;
-
-    /**
-     * Menu item for the close button
-     */
+    /** Menu item for the close button. */
     @FXML
     public MenuItem closeButton;
-
-    /**
-     * Slider for the velocity
-     */
+    /** Slider for the velocity. */
     @FXML
     private Slider velocitySlider;
-
-    /**
-     * Text for the filename
-     */
+    /** Text for the filename. */
     @FXML
     private Text info_filename;
-
-    /**
-     * Text for the format
-     */
+    /** Text for the format. */
     @FXML
     private Text info_format;
-
-    /**
-     * Text for the polygon count
-     */
+    /** Text for the polygon count. */
     @FXML
     private Text info_polygoncount;
 
     /**
-     * Method to initialize the GUI
+     * Method to initialize the GUI.
+     * Overrides the initialize method from the Initialize interface.
+     *
+     * @Postcondition: The velocitySlider value is set to the rotationSpeed.
+     * @Praecondition: The URL and ResourceBundle are not null.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -167,11 +133,13 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to update the texts
+     * Method to update the texts.
      *
-     * @param info1 The filename text
-     * @param info2 The format text
-     * @param info3 The polygon count text
+     * @param info1 The filename text.
+     * @param info2 The format text.
+     * @param info3 The polygon count text.
+     * @Postcondition: The filename, format and polygon count texts are updated.
+     * @Praecondition: The info1, info2 and info3 are not null.
      */
     public void updateTexts(String info1, String info2, String info3) {
         info_filename.setText(info1);
@@ -180,10 +148,12 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to draw the mesh
+     * Method to draw the mesh.
      *
-     * @param scene The scene to draw the mesh in
-     * @return The group object of the mesh
+     * @param scene The scene to draw the mesh in.
+     * @return The group object of the mesh.
+     * @Postcondition: The mesh is drawn in the scene.
+     * @Praecondition: The scene is not null.
      */
     public Group drawMesh(Scene scene)
     {
@@ -237,10 +207,12 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to translate the mesh
+     * Method to translate the mesh.
      *
-     * @param axis The axis to translate
-     * @param distance The distance to translate
+     * @param axis The axis to translate.
+     * @param distance The distance to translate.
+     * @Postcondition: The mesh is translated.
+     * @Praecondition: The axis is not null.
      */
     public void translate(String axis, float distance)
     {
@@ -255,10 +227,12 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to rotate the mesh
+     * Method to rotate the mesh.
      *
-     * @param axis The axis to rotate
-     * @param angle The angle to rotate
+     * @param axis The axis to rotate.
+     * @param angle The angle to rotate.
+     * @Postcondition: The mesh is rotated.
+     * @Praecondition: The axis is not null.
      */
     public void rotate(String axis, float angle)
     {
@@ -273,8 +247,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to set the stage
+     * Method to set the stage.
      *
+     * @Postcondition: The stage is set.
+     * @Praecondition: The stage is not null.
      */
     public void setStage()
     {
@@ -282,34 +258,43 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to set the pivot points
+     * Method to set the pivot points.
      *
-     * @param pivotX The pivot point X
+     * @param pivotX The pivot point X.
+     * @Postcondition: The pivot points are set.
+     * @Praecondition: The pivotX is not null.
      */
     public void setPivotX(double pivotX) {
         this.pivotX = pivotX;
     }
 
     /**
-     * Method to set the pivot points
+     * Method to set the pivot points.
      *
-     * @param pivotY The pivot point Y
+     * @param pivotY The pivot point Y.
+     * @Postcondition: The pivot points are set.
+     * @Praecondition: The pivotY is not null.
      */
     public void setPivotY(double pivotY) {
         this.pivotY = pivotY;
     }
 
     /**
-     * Method to set the pivot points
+     * Method to set the pivot points.
      *
-     * @param pivotZ The pivot point Z
+     * @param pivotZ The pivot point Z.
+     * @Postcondition: The pivot points are set.
+     * @Praecondition: The pivotZ is not null.
      */
     public void setPivotZ(double pivotZ) {
         this.pivotZ = pivotZ;
     }
 
     /**
-     * Method to handle the change material menu item action
+     * Method to handle the change material menu item action.
+     *
+     * @Postcondition: The material is changed.
+     * @Praecondition: The meshView is not null.
      */
     @FXML
     public void handleChangeMaterialMenuItemAction()
@@ -355,8 +340,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to set the camera
+     * Method to set the camera.
      *
+     * @Postcondition: The camera is set.
+     * @Praecondition: The meshView is not null.
      */
     public void setCamera()
     {
@@ -364,7 +351,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the close button action
+     * Method to handle the close button action.
+     *
+     * @Postcondition: The application is closed.
+     * @Praecondition: The closeButton is not null.
      */
     @FXML
     public void handleCloseButtonAction()
@@ -373,8 +363,11 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the about menu item action
-     * @param event The event to handle
+     * Method to handle the about menu item action.
+     *
+     * @param event The event to handle.
+     * @Postcondition: The about-dialog is shown.
+     * @Praecondition: The event is not null.
      */
     @FXML
     void handleAboutMenuItemAction(ActionEvent event)
@@ -397,7 +390,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the continuous rotate button pressed
+     * Method to handle the continuous rotate button pressed.
+     *
+     * @Postcondition: The mesh is rotated continuously.
+     * @Praecondition: The rotationTimeline is not null.
      */
     @FXML
     void handleContinuousRotateButtonPressed()
@@ -416,7 +412,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the continuous rotate button released
+     * Method to handle the continuous rotate button released.
+     *
+     * @Postcondition: The mesh is not rotated continuously.
+     * @Praecondition: The rotationTimeline is not null.
      */
     @FXML
     void handleContinuousRotateButtonReleased()
@@ -428,7 +427,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the rotation button up
+     * Method to handle the rotation button up.
+     *
+     * @Postcondition: The mesh is rotated up.
+     * @Praecondition: The meshView is not null.
      */
     @FXML
     void handleRotationButtonUp()
@@ -438,7 +440,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the rotation button down
+     * Method to handle the rotation button down.
+     *
+     * @Postcondition: The mesh is rotated down.
+     * @Praecondition: The meshView is not null.
      */
     @FXML
     void handleRotationButtonDown()
@@ -448,7 +453,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the rotation button left
+     * Method to handle the rotation button left.
+     *
+     * @Postcondition: The mesh is rotated left.
+     * @Praecondition: The meshView is not null.
      */
     @FXML
     void handleRotationButtonLeft()
@@ -458,7 +466,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the rotation button right
+     * Method to handle the rotation button right.
+     *
+     * @Postcondition: The mesh is rotated right.
+     * @Praecondition: The meshView is not null.
      */
     @FXML
     void handleRotationButtonRight()
@@ -468,7 +479,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the zoom in button
+     * Method to handle the zoom in button.
+     *
+     * @Postcondition: The mesh is zoomed in.
+     * @Praecondition: The meshGroup is not null.
      */
     @FXML
     void handleZoomInButton()
@@ -478,7 +492,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the zoom out button
+     * Method to handle the zoom out button.
+     *
+     * @Postcondition: The mesh is zoomed out.
+     * @Praecondition: The meshGroup is not null.
      */
     @FXML
     void handleZoomOutButton()
@@ -488,9 +505,11 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to update the polyhedron
+     * Method to update the polyhedron.
      *
-     * @param polyhedron The polyhedron to update
+     * @param polyhedron The polyhedron to update.
+     * @Postcondition: The polyhedron is updated.
+     * @Praecondition: The polyhedron is not null.
      */
     public void updatePolyhedron(Polyhedron polyhedron) {
         MeshController meshController = new MeshController();
@@ -502,7 +521,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the get coordinates button action
+     * Method to handle the get coordinates button action.
+     *
+     * @Postcondition: The coordinates are printed.
+     * @Praecondition: The meshView is not null.
      */
     @FXML
     void handleGetCoordsButtonAction() {
@@ -538,7 +560,10 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Method to handle the reset button action
+     * Method to handle the reset button action.
+     *
+     * @Postcondition: The mesh is reset.
+     * @Praecondition: The meshView is not null.
      */
     public void parseCommand(String input)
     {

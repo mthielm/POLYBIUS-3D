@@ -9,13 +9,15 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
  * This class is responsible for calculating the surface area of a polygon.
  */
 public class SurfaceCalculatorThread extends Thread {
-    /**
-     * The surface area of the polygon.
-     */
+    /** The surface area of the polygon. */
     private double surfaceArea = Constants.ZERO;
 
     /**
      * The run method of the thread.
+     * Overrides the run method of the Thread class.
+     *
+     * @Postcondition: The surface area of the polygon is calculated.
+     * @Praecondition: The polygon list is not empty.
      */
     @Override
     public void run() {

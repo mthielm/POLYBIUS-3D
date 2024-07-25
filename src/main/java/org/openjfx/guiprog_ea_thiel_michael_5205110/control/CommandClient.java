@@ -9,24 +9,24 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
  * The client sends commands to the server and receives the response.
  * The client is also able to send Polyhedrons to the server.
  *
- * @see CommandServer
+ * @see java.net.Socket
+ * @see java.io.BufferedReader
+ * @see java.io.InputStreamReader
  */
 public class CommandClient implements Runnable
 {
-    /**
-     * Hostname of the server
-     */
+    /** Hostname of the server. */
     private final String hostName;
-    /**
-     * Port number of the server
-     */
+    /** Port number of the server. */
     private final int portNumber;
 
     /**
-     * Constructor of the CommandClient
+     * Constructor of the CommandClient.
      *
-     * @param hostName Hostname of the server
-     * @param portNumber Port number of the server
+     * @param hostName Hostname of the server.
+     * @param portNumber Port number of the server.
+     * @Postcondition: The CommandClient is initialized.
+     * @Praecondition: hostName is not null, portNumber is greater than 0.
      */
     public CommandClient(String hostName, int portNumber)
     {
@@ -37,6 +37,9 @@ public class CommandClient implements Runnable
     /**
      * Method to run the client.
      * Opens a socket to the server and sends commands to the server.
+     *
+     * @Postcondition: The client is running.
+     * @Praecondition: The server is running.
      */
     @Override
     public void run()
@@ -47,7 +50,9 @@ public class CommandClient implements Runnable
     /**
      * Method to open a socket to the server.
      *
-     * @return The socket to the server
+     * @return The socket to the server.
+     * @Postcondition: A socket to the server is opened.
+     * @Praecondition: The server is running.
      */
     private java.net.Socket openSocket()
     {
@@ -64,7 +69,9 @@ public class CommandClient implements Runnable
     /**
      * Method to read and send commands to the server.
      *
-     * @param socket The socket to the server
+     * @param socket The socket to the server.
+     * @Postcondition: The client sends commands to the server.
+     * @Praecondition: The server is running.
      */
     private void readAndSend(java.net.Socket socket)
     {
