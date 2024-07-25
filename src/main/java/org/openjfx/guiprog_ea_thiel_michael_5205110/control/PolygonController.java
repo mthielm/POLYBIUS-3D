@@ -3,12 +3,14 @@ package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polygon;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Vector;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Vertex;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 import java.util.List;
 
 /**
- * Controller class for polygons. Provides methods to calculate the surface area of a polygon.
+ * Controller class for polygons. Provides methods to calculate the surface
+ * area of a polygon.
  * The class is implemented as a singleton.
  *
  * @see Polygon
@@ -47,14 +49,14 @@ public class PolygonController
     {
         double area;
         List<Vertex> vertices = polygon.getVertices();
-        if (vertices.size() >= 3)
+        if (vertices.size() >= Constants.THREE)
         {
-            Vector v0 = new Vector(vertices.get(0));
-            Vector v1 = new Vector(vertices.get(1));
-            Vector v2 = new Vector(vertices.get(2));
+            Vector v0 = new Vector(vertices.get(Constants.ZERO));
+            Vector v1 = new Vector(vertices.get(Constants.ONE));
+            Vector v2 = new Vector(vertices.get(Constants.TWO));
             Vector ab = v1.subtract(v0);
             Vector ac = v2.subtract(v0);
-            area = 0.5 * ab.crossProduct(ac).magnitude();
+            area = Constants.ZERO_FIVE * ab.crossProduct(ac).magnitude();
             polygon.setArea(area);
         }
     }

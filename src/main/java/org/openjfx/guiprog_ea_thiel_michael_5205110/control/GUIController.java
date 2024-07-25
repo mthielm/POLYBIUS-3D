@@ -26,6 +26,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
@@ -35,89 +36,193 @@ import java.util.ResourceBundle;
 
 import static javafx.scene.transform.Rotate.*;
 
+/**
+ * Controller class for the GUI. Handles the GUI events and updates the GUI.
+ * The GUIController class is a singleton class.
+ * The GUIController class is the main controller class for the GUI.
+ * The GUIController class is responsible for handling the GUI events and updating the GUI.
+ *
+ * @see javafx.fxml.Initializable
+ */
 public class GUIController implements Initializable
 {
+    /**
+     * Singleton instance of the GUIController
+     */
     private static GUIController instance = null;
 
+    /**
+     * Constructor of the GUIController
+     */
     public GUIController()
     {
         if(instance == null)
             instance = this;
     }
 
+    /**
+     * Method to get the instance of the GUIController
+     *
+     * @return The instance of the GUIController
+     */
     public static GUIController getInstance() {
         return instance;
     }
 
+    /**
+     * Stage of the GUI
+     */
     private Stage stage;
+    /**
+     * Camera of the GUI
+     */
     private PerspectiveCamera camera;
+    /**
+     * Anchor points for the rotation
+     */
     double anchorX, anchorY, anchorZ;
-    private double rotationSpeed = 1;
-    private double anchorAngleX = 0;
-    private double anchorAngleY = 0;
-    private double anchorAngleZ = 0;
+    /**
+     * Rotation speed of the mesh
+     */
+    private double rotationSpeed = Constants.ONE;
+    /**
+     * Anchor angles for the rotation
+     */
+    private double anchorAngleX = Constants.ZERO;
+    /**
+     * Anchor angles for the rotation
+     */
+    private double anchorAngleY = Constants.ZERO;
+    /**
+     * Anchor angles for the rotation
+     */
+    private double anchorAngleZ = Constants.ZERO;
 
+    /**
+     * Pivot points for the rotation
+     */
     double pivotX;
+    /**
+     * Pivot points for the rotation
+     */
     double pivotY;
+    /**
+     * Pivot points for the rotation
+     */
     double pivotZ;
-
+    /**
+     * Timeline for the rotation
+     */
     private Timeline rotationTimeline;
 
+    /**
+     * MeshView object for the 3D mesh
+     */
     @FXML
     private MeshView meshView;
 
+    /**
+     * Group object for the 3D mesh
+     */
     @FXML
     private Group meshGroup;
 
+    /**
+     * Menu item for the about-dialog
+     */
     @FXML
     private MenuItem aboutMenuItem;
 
+    /**
+     * Menu item for the close button
+     */
     @FXML
     public MenuItem closeButton;
 
+    /**
+     * Button for changing the material
+     */
     @FXML
     private Button rotateButtonDown;
 
+    /**
+     * Button for changing the material
+     */
     @FXML
     private Button rotateButtonLeft;
 
+    /**
+     * Button for changing the material
+     */
     @FXML
     private Button rotateButtonRight;
 
+    /**
+     * Button for changing the material
+     */
     @FXML
     private Button rotateButtonUp;
 
+    /**
+     * Button for changing the material
+     */
     @FXML
     private Button zoomButton;
 
+    /**
+     * Button for changing the material
+     */
     @FXML
     private Button zoomOutButton;
 
+    /**
+     * Slider for the velocity
+     */
     @FXML
     private Slider velocitySlider;
 
+    /**
+     * Text for the filename
+     */
     @FXML
     private Text info_filename;
 
+    /**
+     * Text for the format
+     */
     @FXML
     private Text info_format;
 
+    /**
+     * Text for the polygon count
+     */
     @FXML
     private Text info_polygoncount;
 
+    /**
+     * Button for continuous rotation
+     */
     @FXML
     private RadioButton continuousRotateButtonStart;
 
+    /**
+     * Button for continuous rotation
+     */
     @FXML
     private RadioButton continuousRotateButtonStop;
 
+    /**
+     * Method to initialize the GUI
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         velocitySlider.valueProperty().addListener(new ChangeListener<Number>()
         {
+            // This method is called whenever the velocitySlider value changes
             @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+            public void changed(ObservableValue<? extends Number>
+                                observableValue, Number number, Number t1) {
                 rotationSpeed = (int) velocitySlider.getValue();
             }
         });
@@ -127,48 +232,80 @@ public class GUIController implements Initializable
         aboutMenuItem.setOnAction(this::handleAboutMenuItemAction);
     }
 
+    /**
+     * Method to set the filename text
+     *
+     * @param info1 The filename text
+     */
     public void setInfo_filename(String info1) {
         info_filename.setText(info1);
     }
 
+    /**
+     * Method to set the format text
+     *
+     * @param info2 The format text
+     */
     public void setInfo_format(String info2) {
         info_format.setText(info2);
     }
 
+    /**
+     * Method to set the polygon count text
+     *
+     * @param info3 The polygon count text
+     */
     public void setInfo_polygoncount(int info3) {
         info_polygoncount.setText(String.valueOf(info3));
     }
 
+    /**
+     * Method to update the texts
+     *
+     * @param info1 The filename text
+     * @param info2 The format text
+     * @param info3 The polygon count text
+     */
     public void updateTexts(String info1, String info2, String info3) {
         info_filename.setText(info1);
-        info_format.setText(info2 + " File");
-        info_polygoncount.setText(info3 + " Polygons");
+        info_format.setText(info2 + Literals.FILE);
+        info_polygoncount.setText(info3 + Literals.POLYGONS);
     }
 
+    /**
+     * Method to draw the mesh
+     *
+     * @param scene The scene to draw the mesh in
+     * @return The group object of the mesh
+     */
     public Group drawMesh(Scene scene)
     {
         meshView = new MeshView(Polygon3D.getInstance());
         //meshView = new MeshView(new Polygon3D());
 
         meshView.setMaterial(new PhongMaterial(Color.BLACK));
-        meshView.setTranslateX((scene.getWidth()/2));
-        meshView.setTranslateY((scene.getHeight()/2)-100);
+        meshView.setTranslateX((scene.getWidth()/Constants.TWO));
+        meshView.setTranslateY((scene.getHeight()/Constants.TWO)
+                -Constants.ONEHUNDRED);
         meshView.setCullFace(CullFace.NONE);
         //meshView.setDrawMode(DrawMode.LINE);
 
         meshView.setRotationAxis(X_AXIS);
-        meshView.setRotate(90);
+        meshView.setRotate(Constants.NINETY);
 
         //ALIEN CONFIGURATION
-        meshView.setTranslateX(420);
-        meshView.setTranslateY(+150);
-        meshView.setTranslateZ(-450);
+        meshView.setTranslateX(Constants.FOURHUNDRETTWENTY);
+        meshView.setTranslateY(+Constants.ONEHUNDRETFIFTY);
+        meshView.setTranslateZ(-Constants.FOURHUNDRETFIFTY);
 
 
 
-        Rotate rotateX = new Rotate(0, pivotX, pivotY, pivotZ, X_AXIS);
-        Rotate rotateY = new Rotate(0, pivotX, pivotY, pivotZ, Y_AXIS);
-        Rotate rotateZ = new Rotate(0, pivotX, pivotY, pivotZ, Z_AXIS);
+        Rotate rotateX = new Rotate(Constants.ZERO, pivotX, pivotY, pivotZ,
+                X_AXIS);
+        Rotate rotateY = new Rotate(Constants.ZERO, pivotX, pivotY, pivotZ,
+                Y_AXIS);
+        Rotate rotateZ = new Rotate(Constants.ZERO, pivotX, pivotY, pivotZ,
+                Z_AXIS);
 
         meshView.getTransforms().addAll(rotateX, rotateY, rotateZ);
 
@@ -184,8 +321,10 @@ public class GUIController implements Initializable
                 rotateX.setAngle(anchorAngleX + anchorY - event.getSceneY());
                 rotateZ.setAngle(anchorAngleY + anchorX - event.getSceneX());
             } else if (event.isSecondaryButtonDown()) {
-                meshView.setTranslateX(meshView.getTranslateX() + event.getSceneX() - anchorX);
-                meshView.setTranslateY(meshView.getTranslateY() + event.getSceneY() - anchorY);
+                meshView.setTranslateX(meshView.getTranslateX() +
+                        event.getSceneX() - anchorX);
+                meshView.setTranslateY(meshView.getTranslateY() +
+                        event.getSceneY() - anchorY);
                 anchorX = event.getSceneX();
                 anchorY = event.getSceneY();
             }
@@ -195,21 +334,39 @@ public class GUIController implements Initializable
         return meshGroup;
     }
 
+    /**
+     * Method to translate the mesh
+     *
+     * @param axis The axis to translate
+     * @param distance The distance to translate
+     */
     public void translate(String axis, float distance)
     {
         switch (axis) {
-            case "x" -> meshView.setTranslateX(meshView.getTranslateX() + distance);
-            case "y" -> meshView.setTranslateY(meshView.getTranslateY() + distance);
-            case "z" -> meshView.setTranslateZ(meshView.getTranslateZ() + distance);
+            case Literals.X -> meshView.setTranslateX(meshView.getTranslateX() +
+                    distance);
+            case Literals.Y -> meshView.setTranslateY(meshView.getTranslateY() +
+                    distance);
+            case Literals.Z -> meshView.setTranslateZ(meshView.getTranslateZ() +
+                    distance);
         }
     }
 
+    /**
+     * Method to rotate the mesh
+     *
+     * @param axis The axis to rotate
+     * @param angle The angle to rotate
+     */
     public void rotate(String axis, float angle)
     {
         switch (axis) {
-            case "x" -> meshView.getTransforms().add(new Rotate(angle, pivotX, pivotY, pivotZ, X_AXIS));
-            case "y" -> meshView.getTransforms().add(new Rotate(angle, pivotX, pivotY, pivotZ, Y_AXIS));
-            case "z" -> meshView.getTransforms().add(new Rotate(angle, pivotX, pivotY, pivotZ, Z_AXIS));
+            case Literals.X -> meshView.getTransforms().add(new Rotate(angle,
+                    pivotX, pivotY, pivotZ, X_AXIS));
+            case Literals.Y -> meshView.getTransforms().add(new Rotate(angle,
+                    pivotX, pivotY, pivotZ, Y_AXIS));
+            case Literals.Z -> meshView.getTransforms().add(new Rotate(angle,
+                    pivotX, pivotY, pivotZ, Z_AXIS));
         }
     }
 
@@ -224,23 +381,46 @@ public class GUIController implements Initializable
             meshView.getTransforms().add(new Rotate(angle,pivotX, pivotY, pivotZ, Rotate.Z_AXIS));
     }*/
 
+    /**
+     * Method to set the stage
+     *
+     * @param stage The stage to set
+     */
     public void setStage(Stage stage)
     {
         this.stage = stage;
     }
 
+    /**
+     * Method to set the pivot points
+     *
+     * @param pivotX The pivot point X
+     */
     public void setPivotX(double pivotX) {
         this.pivotX = pivotX;
     }
 
+    /**
+     * Method to set the pivot points
+     *
+     * @param pivotY The pivot point Y
+     */
     public void setPivotY(double pivotY) {
         this.pivotY = pivotY;
     }
 
+    /**
+     * Method to set the pivot points
+     *
+     * @param pivotZ The pivot point Z
+     */
     public void setPivotZ(double pivotZ) {
         this.pivotZ = pivotZ;
     }
 
+    /**
+     * Method to handle the change material menu item action
+     */
     @FXML
     public void handleChangeMaterialMenuItemAction()
     {
@@ -248,73 +428,92 @@ public class GUIController implements Initializable
         dialogStage.initModality(Modality.WINDOW_MODAL);
 
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll("Red", "Green", "Blue", "Orange", "Yellow", "Black");
-        choiceBox.setValue("Red");
+        choiceBox.getItems().addAll(Literals.RED, Literals.GREEN,
+                                         Literals.BLUE, Literals.ORANGE,
+                                         Literals.YELLOW, Literals.BLACK);
+        choiceBox.setValue(Literals.RED);
 
-        choiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        choiceBox.getSelectionModel().selectedItemProperty().addListener
+                ((observable, oldValue, newValue) -> {
             PhongMaterial material = new PhongMaterial();
             switch (newValue) {
-                case "Red":
+                case Literals.RED:
                     material.setDiffuseColor(Color.RED);
                     break;
-                case "Green":
+                case Literals.GREEN:
                     material.setDiffuseColor(Color.GREEN);
                     break;
-                case "Blue":
+                case Literals.BLUE:
                     material.setDiffuseColor(Color.BLUE);
                     break;
-                case "Orange":
+                case Literals.ORANGE:
                     material.setDiffuseColor(Color.ORANGE);
                     break;
-                case "Yellow":
+                case Literals.YELLOW:
                     material.setDiffuseColor(Color.YELLOW);
                     break;
-                case "Black":
+                case Literals.BLACK:
                     material.setDiffuseColor(Color.BLACK);
                     break;
             }
             meshView.setMaterial(material);
         });
 
-        Button okButton = new Button("OK");
+        Button okButton = new Button(Literals.OK);
         okButton.setOnAction(e -> dialogStage.close());
 
         VBox vbox = new VBox(choiceBox, okButton);
         vbox.setAlignment(Pos.CENTER);
-        vbox.setPadding(new Insets(15));
+        vbox.setPadding(new Insets(Constants.FIFTEEN));
 
         dialogStage.setScene(new Scene(vbox));
         dialogStage.show();
     }
 
     //Maybe move somewhere else
+    /**
+     * Method to start the command threads
+     */
     public void startCommandThreads()
     {
-        (new Thread(new CommandServer(1233))).start();
+        (new Thread(new CommandServer(Constants.PORT))).start();
         while (!CommandServer.isAccepting()) {
             try
             {
-                Thread.sleep(1000);
+                Thread.sleep(Constants.MILLISECONDS);
             }
             catch (InterruptedException e)
             {
                 throw new RuntimeException(e);
             }
         }
-        (new Thread(new CommandClient("127.0.0.1", 1233))).start();
+        (new Thread(new CommandClient(Literals.HOST_NAME, Constants.PORT))).
+                start();
     }
 
+    /**
+     * Method to set the camera
+     *
+     * @param camera The camera to set
+     */
     public void setCamera(PerspectiveCamera camera)
     {
         this.camera = camera;
     }
 
+    /**
+     * Method to handle the close button action
+     */
     @FXML
     public void handleCloseButtonAction()
     {
-        System.exit(0);
+        System.exit(Constants.ZERO);
     }
 
+    /**
+     * Method to handle the about menu item action
+     * @param event The event to handle
+     */
     @FXML
     void handleAboutMenuItemAction(ActionEvent event)
     {
@@ -323,31 +522,42 @@ public class GUIController implements Initializable
 
         Label aboutLabel = new Label(Literals.GUI_ABOUT_MENU);
         aboutLabel.setWrapText(true);
-        aboutLabel.setPadding(new Insets(10));
+        aboutLabel.setPadding(new Insets(Constants.TEN));
 
         VBox aboutVBox = new VBox(aboutLabel);
         aboutVBox.setAlignment(Pos.CENTER);
 
-        Scene aboutScene = new Scene(aboutVBox, 250, 120);
+        Scene aboutScene = new Scene(aboutVBox, Constants.TWOHUNDREDFIFTY,
+                Constants.ONEHUNDREDTWENTY);
         aboutStage.setScene(aboutScene);
         aboutStage.initModality(Modality.APPLICATION_MODAL);
         aboutStage.showAndWait();
     }
 
+    /**
+     * Method to handle the continuous rotate button pressed
+     */
     @FXML
     void handleContinuousRotateButtonPressed()
     {
         if (rotationTimeline == null)
         {
-            rotationTimeline = new Timeline(new KeyFrame(Duration.millis(16), e ->
+            rotationTimeline =
+                    new Timeline(new KeyFrame(Duration.millis(Constants.SIXTEEN),
+                    e ->
             {
-                meshView.getTransforms().add(new Rotate(rotationSpeed/50, pivotX, pivotY, pivotZ, Z_AXIS));
+                meshView.getTransforms().add(new Rotate(
+                        rotationSpeed/Constants.FIFTY,
+                        pivotX, pivotY, pivotZ, Z_AXIS));
             }));
             rotationTimeline.setCycleCount(Timeline.INDEFINITE);
         }
         rotationTimeline.play();
     }
 
+    /**
+     * Method to handle the continuous rotate button released
+     */
     @FXML
     void handleContinuousRotateButtonReleased()
     {
@@ -357,42 +567,71 @@ public class GUIController implements Initializable
         }
     }
 
+    /**
+     * Method to handle the rotation button up
+     */
     @FXML
     void handleRotationButtonUp()
     {
-        meshView.getTransforms().add(new Rotate(10, pivotX, pivotY, pivotZ, X_AXIS));
+        meshView.getTransforms().add(new Rotate(Constants.TEN, pivotX, pivotY,
+                pivotZ, X_AXIS));
     }
 
+    /**
+     * Method to handle the rotation button down
+     */
     @FXML
     void handleRotationButtonDown()
     {
-        meshView.getTransforms().add(new Rotate(-10, pivotX, pivotY, pivotZ, X_AXIS));
+        meshView.getTransforms().add(new Rotate(-Constants.TEN, pivotX, pivotY,
+                pivotZ, X_AXIS));
     }
 
+    /**
+     * Method to handle the rotation button left
+     */
     @FXML
     void handleRotationButtonLeft()
     {
-        meshView.getTransforms().add(new Rotate(-10, pivotX, pivotY, pivotZ, Z_AXIS));
+        meshView.getTransforms().add(new Rotate(-Constants.TEN, pivotX, pivotY,
+                pivotZ, Z_AXIS));
     }
 
+    /**
+     * Method to handle the rotation button right
+     */
     @FXML
     void handleRotationButtonRight()
     {
-        meshView.getTransforms().add(new Rotate(10, pivotX, pivotY, pivotZ, Z_AXIS));
+        meshView.getTransforms().add(new Rotate(Constants.TEN, pivotX, pivotY,
+                pivotZ, Z_AXIS));
     }
 
+    /**
+     * Method to handle the zoom in button
+     */
     @FXML
     void handleZoomInButton()
     {
-        meshGroup.translateZProperty().set(meshGroup.getTranslateZ() - 20);
+        meshGroup.translateZProperty().set(meshGroup.getTranslateZ() -
+                                           Constants.TWENTY);
     }
 
+    /**
+     * Method to handle the zoom out button
+     */
     @FXML
     void handleZoomOutButton()
     {
-        meshGroup.translateZProperty().set(meshGroup.getTranslateZ() + 10);
+        meshGroup.translateZProperty().set(meshGroup.getTranslateZ() +
+                                           Constants.TEN);
     }
 
+    /**
+     * Method to update the polyhedron
+     *
+     * @param polyhedron The polyhedron to update
+     */
     public void updatePolyhedron(Polyhedron polyhedron) {
         MeshController meshController = new MeshController();
         float[] points = meshController.mapPoints(polyhedron);
@@ -402,6 +641,9 @@ public class GUIController implements Initializable
         Polygon3D.getInstance().setupMesh(points, textures, combinedFaces);
     }
 
+    /**
+     * Method to handle the get coordinates button action
+     */
     @FXML
     void handleGetCoordsButtonAction() {
         // Accessing translation properties
@@ -410,7 +652,8 @@ public class GUIController implements Initializable
         double translateZ = meshView.getTranslateZ();
 
         // Assuming rotation is applied via Rotate transforms
-        double rotationX = 0, rotationY = 0, rotationZ = 0;
+        double rotationX = Constants.ZERO, rotationY = Constants.ZERO,
+               rotationZ = Constants.ZERO;
         for (Transform transform : meshView.getTransforms()) {
             if (transform instanceof Rotate) {
                 Rotate rotate = (Rotate) transform;
@@ -426,35 +669,48 @@ public class GUIController implements Initializable
         }
 
         // Printing the coordinates and rotations
-        Console.log("Coordinates: X=" + translateX + ", Y=" + translateY + ", Z=" + translateZ);
-        Console.log("Rotations: X=" + rotationX + "°, Y=" + rotationY + "°, Z=" + rotationZ + "°");
+        Console.log(Literals.COORDINATES_MSG_1 + translateX +
+                         Literals.COORDINATES_MSG_2 + translateY +
+                         Literals.COORDINATES_MSG_3 + translateZ);
+        Console.log(Literals.ROTATION_MSG_1 + rotationX +
+                         Literals.ROTATION_MSG_2 + rotationY +
+                         Literals.ROTATION_MSG_3 + rotationZ +
+                         Literals.ROTATION_MSG_4);
     }
 
+    /**
+     * Method to handle the reset button action
+     */
     public void parseCommand(String input)
     {
-        String[] parts = input.split(" ");
-        Console.log("Command: " + parts[0] + "/" + parts[1] + "/" + parts[2]);
-        String command = parts[0];
-        if (command.equals("translate"))
+        String[] parts = input.split(Literals.BACKSPACE);
+        Console.log(Literals.COMMAND + parts[Constants.ZERO] +
+                         Literals.SLASH + parts[Constants.ONE] +
+                         Literals.SLASH + parts[Constants.TWO]);
+        String command = parts[Constants.ZERO];
+        if (command.equals(Literals.TRANSLATE))
         {
 
             // Perform translation
-            String axis = parts[1];
-            float distance = Float.parseFloat(parts[2]);
+            String axis = parts[Constants.ONE];
+            float distance = Float.parseFloat(parts[Constants.TWO]);
 
             // Call the method in MeshController class to translate
             GUIController.getInstance().translate(axis, distance);
-            Console.log("Tatsächlich angesteuerter Controller: " + GUIController.getInstance());
+            Console.log(Literals.CONTROLLER_MSG +
+                    GUIController.getInstance());
 
-            Console.log("Translation: (" + axis + "," + distance + ")");
-        } else if (command.equals("rotate"))
+            Console.log(Literals.TRANSLATION + axis + Literals.COMMA +
+                    distance + Literals.BRACKET);
+        } else if (command.equals(Literals.ROTATE))
         {
             // Perform rotation
-            String axis = parts[1];
-            float angle = Float.parseFloat(parts[2]);
+            String axis = parts[Constants.ONE];
+            float angle = Float.parseFloat(parts[Constants.TWO]);
             // Call the method in MeshController class to rotate
             GUIController.getInstance().rotate(axis, angle);
-            Console.log("Rotation: (" + axis + "," + angle + ")");
+            Console.log(Literals.ROTATION + axis + Literals.COMMA +
+                    angle + Literals.BRACKET);
         }
     }
 }

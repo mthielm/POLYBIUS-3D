@@ -1,27 +1,53 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+/**
+ * Class to receive commands from the server.
+ * The server sends commands to the client and receives the response.
+ * The server is also able to receive Polyhedrons from the client.
+ */
 public class CommandServer implements Runnable
 {
+    /**
+     * Port number of the server
+     */
     private static boolean isAccepting = false;
-
+    /**
+     * Port number of the server
+     */
     private int portNumber = -1;
 
+    /**
+     * Constructor of the CommandServer
+     *
+     * @param portNumber Port number of the server
+     */
     public CommandServer(int portNumber)
     {
         this.portNumber = portNumber;
     }
 
+    /**
+     * Method to check if the server is accepting connections.
+     *
+     * @return True if the server is accepting connections, false otherwise
+     */
     public static boolean isAccepting()
     {
         return isAccepting;
     }
 
+    /**
+     * Method to run the server.
+     * Opens a socket to the client and receives commands from the client.
+     */
     @Override
     public void run()
     {
@@ -32,10 +58,10 @@ public class CommandServer implements Runnable
         }
         catch (java.io.IOException e)
         {
-            Console.log("Error: " + e.getMessage());
+            Console.log(Literals.ERROR + e.getMessage());
             return;
         }
-        Console.log("Waiting for client to connect...");
+        Console.log(Literals.WAITING_FOR_CLIENT);
         java.net.Socket client = null;
         try
         {
@@ -44,25 +70,35 @@ public class CommandServer implements Runnable
         }
         catch (java.io.IOException e)
         {
-            Console.log("Error Accepting: " + e.getMessage());
-            System.exit(0);
+            Console.log(Literals.ERROR_ACCEPTING + e.getMessage());
+            System.exit(Constants.ZERO);
         }
-        Console.log("Client connected!");
+        Console.log(Literals.CLIENT_CONNECTED);
         serveClient(client);
     }
 
+    /**
+     * Method to serve the client.
+     * Reads the commands from the client and sends them to the GUI.
+     *
+     * @param client The client to serve
+     */
     private void serveClient(java.net.Socket client)
     {
         try
         {
-            java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(client.getInputStream()));
-            java.io.PrintWriter out = new java.io.PrintWriter(client.getOutputStream(), true);
+            java.io.BufferedReader in = new java.io.BufferedReader
+                    (new java.io.InputStreamReader(client.getInputStream()));
+            java.io.PrintWriter out = new java.io.PrintWriter
+                    (client.getOutputStream(), true);
             String inputLine;
             while((inputLine = in.readLine()) != null)
-                if (inputLine.length() > 0)
+                if (inputLine.length() > Constants.ZERO)
                 {
-                    //Code to send the command to the GUI to either translate or rotate object i.e translate(axis, distance) or rotate(axis, angle)
-                    //parseCommand(inputLine);
+                    // Code to send the command to the GUI to either
+                    // translate or rotate object i.e. translate(axis,
+                    // distance) or rotate(axis, angle) parseCommand
+                    // (inputLine);
                     GUIController.getInstance().parseCommand(inputLine);
 
                 }
@@ -78,7 +114,7 @@ public class CommandServer implements Runnable
             }
             catch (java.io.IOException e)
             {
-                Console.log("Error Eingabe/Ausgabe: " + e.getMessage());
+                Console.log(Literals.ERROR_IN_OUT + e.getMessage());
             }
         }
 
@@ -111,12 +147,19 @@ public class CommandServer implements Runnable
         }
     }*/
 
+    /**
+     * Method to receive a Polyhedron from the client.
+     *
+     * @param client The client to receive the Polyhedron from
+     * @return The Polyhedron received from the client
+     */
     public Polyhedron receivePolyhedron(java.net.Socket client) {
         try {
-            ObjectInputStream in = new ObjectInputStream(client.getInputStream());
+            ObjectInputStream in = new ObjectInputStream
+                    (client.getInputStream());
             return (Polyhedron) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            Console.log("Error: " + e.getMessage());
+            Console.log(Literals.ERROR + e.getMessage());
             return null;
         }
     }

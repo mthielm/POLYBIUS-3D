@@ -29,7 +29,8 @@ public class STLReader
     public static Polyhedron parse(String file)
     {
         try {
-            DataInputStream inputStream = new DataInputStream(new FileInputStream(file));
+            DataInputStream inputStream = new DataInputStream
+                    (new FileInputStream(file));
 
             if(isASCII(inputStream))
             {
@@ -68,42 +69,49 @@ public class STLReader
             data = data.trim();
 
             // Parses facet data
-            if (data.startsWith("facet"))
+            if (data.startsWith(Literals.FACET))
             {
 
-                String[] parts = data.split("\\s+");
+                String[] parts = data.split(Literals.REGEX);
 
-                float nx = Float.parseFloat(parts[2]);
-                float ny = Float.parseFloat(parts[3]);
-                float nz = Float.parseFloat(parts[4]);
+                float nx = Float.parseFloat(parts[Constants.TWO]);
+                float ny = Float.parseFloat(parts[Constants.THREE]);
+                float nz = Float.parseFloat(parts[Constants.FOUR]);
 
                 tempFace = new Vector(nx, ny, nz);
 
             }
             // Parses vertex data
-            else if (data.startsWith("vertex"))
+            else if (data.startsWith(Literals.VERTEX))
             {
-                String[] parts = data.split("\\s+");
+                String[] parts = data.split(Literals.REGEX);
 
-                float x = Float.parseFloat(parts[1]);
-                float y = Float.parseFloat(parts[2]);
-                float z = Float.parseFloat(parts[3]);
+                float x = Float.parseFloat(parts[Constants.ONE]);
+                float y = Float.parseFloat(parts[Constants.TWO]);
+                float z = Float.parseFloat(parts[Constants.THREE]);
 
                 tempPoly.addVertex(new Vertex(x, y, z));
             }
             // Resulting polygon is added to the polyhedron
-            else if (data.equals("endfacet"))
+            else if (data.equals(Literals.ENDFACET))
             {
                 tempPoly.setNormal(tempFace);
 
-                tempPoly.addEdge(new Edge(tempPoly.getVertices().get(0), tempPoly.getVertices().get(1)));
-                tempPoly.addEdge(new Edge(tempPoly.getVertices().get(1), tempPoly.getVertices().get(2)));
-                tempPoly.addEdge(new Edge(tempPoly.getVertices().get(2), tempPoly.getVertices().get(0)));
+                tempPoly.addEdge(new Edge(
+                        tempPoly.getVertices().get(Constants.ZERO),
+                        tempPoly.getVertices().get(Constants.ONE)));
+                tempPoly.addEdge(new Edge(
+                        tempPoly.getVertices().get(Constants.ONE),
+                        tempPoly.getVertices().get(Constants.TWO)));
+                tempPoly.addEdge(new Edge(
+                        tempPoly.getVertices().get(Constants.TWO),
+                        tempPoly.getVertices().get(Constants.ZERO)));
 
                 polyhedron.addPolygon(tempPoly);
 
                 // Update info box in GUI
-                FileInfo.getInstance().setPolygonCount(polyhedron.getPolygons().toArray().length);
+                FileInfo.getInstance().setPolygonCount(
+                        polyhedron.getPolygons().toArray().length);
                 FileInfo.getInstance().setFileFormat(File.ASCII_FORMAT);
 
                 // Concurrent calculation of volume
@@ -126,11 +134,12 @@ public class STLReader
      */
     private static Polyhedron readBinary(String file) throws IOException
     {
-        DataInputStream inputStream = new DataInputStream(new FileInputStream(file));
+        DataInputStream inputStream = new DataInputStream(
+                new FileInputStream(file));
         inputStream.skipBytes(Constants.BINARY_HEADER);
 
         // Read the next 4 bytes as an unsigned integer (number of triangles)
-        byte[] bytes = new byte[4];
+        byte[] bytes = new byte[Constants.FOUR];
         inputStream.readFully(bytes);
 
         // Convert to an unsigned int using little-endian order
@@ -155,7 +164,7 @@ public class STLReader
             float nz = readFloat(inputStream);
             tempFace = new Vector(nx, ny, nz);
 
-            for (int j = 0; j < 3; j++)
+            for (int j = Constants.ZERO; j < Constants.THREE; j++)
             {
                 float x = readFloat(inputStream);
                 float y = readFloat(inputStream);
@@ -165,9 +174,12 @@ public class STLReader
             // Adds resulting polygon to the polyhedron
             tempPoly.setNormal(tempFace);
 
-            tempPoly.addEdge(new Edge(tempPoly.getVertices().get(0), tempPoly.getVertices().get(1)));
-            tempPoly.addEdge(new Edge(tempPoly.getVertices().get(1), tempPoly.getVertices().get(2)));
-            tempPoly.addEdge(new Edge(tempPoly.getVertices().get(2), tempPoly.getVertices().get(0)));
+            tempPoly.addEdge(new Edge(tempPoly.getVertices().get(Constants.ZERO),
+                    tempPoly.getVertices().get(Constants.ONE)));
+            tempPoly.addEdge(new Edge(tempPoly.getVertices().get(Constants.ONE),
+                    tempPoly.getVertices().get(Constants.TWO)));
+            tempPoly.addEdge(new Edge(tempPoly.getVertices().get(Constants.TWO),
+                    tempPoly.getVertices().get(Constants.ZERO)));
 
             // Skip 2 Byte unsigned int after each polygon
             inputStream.skipBytes(Constants.BINARY_UNSIGNED_INT_SIZE_BYTES);
@@ -184,7 +196,8 @@ public class STLReader
     }
 
     /**
-     * Converts 4 bytes from an input stream to a float using little-endian order.
+     * Converts 4 bytes from an input stream to a float using little-endian
+     * order.
      *
      * @param inputStream The input stream.
      * @return The resulting float value.

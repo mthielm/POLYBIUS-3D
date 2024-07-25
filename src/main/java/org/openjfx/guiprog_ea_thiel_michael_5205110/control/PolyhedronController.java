@@ -12,7 +12,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Controller class for polyhedrons. Provides methods to calculate the surface area and volume of a polyhedron.
+ * Controller class for polyhedrons. Provides methods to calculate the surface
+ * area and volume of a polyhedron.
  * Also provides a method to sort the polygons of a polyhedron by their area.
  * The class is implemented as a singleton.
  *
@@ -25,7 +26,8 @@ public class PolyhedronController
     /**
      * The singleton instance of the class.
      */
-    private static final PolyhedronController instance = new PolyhedronController();
+    private static final PolyhedronController instance =
+            new PolyhedronController();
 
     /**
      * Default private Constructor.
@@ -46,7 +48,8 @@ public class PolyhedronController
     /**
      * Calculates the surface area of a given polyhedron.
      *
-     * @param polyhedron The polyhedron for which the surface area is to be calculated.
+     * @param polyhedron The polyhedron for which the surface area is to be
+     *                   calculated.
      */
     public void calculateSurface(Polyhedron polyhedron)
     {
@@ -103,21 +106,31 @@ public class PolyhedronController
             {
                 Vector normal = polygon.getNormal();
                 List<Vertex> vertices = polygon.getVertices();
-                if (vertices.size() >= 3)
+                if (vertices.size() >= Constants.THREE)
                 {
-                    Vector vector0 = new Vector(vertices.get(0).getX(), vertices.get(0).getY(), vertices.get(0).getZ());
-                    Vector vector1 = new Vector(vertices.get(1).getX(), vertices.get(1).getY(), vertices.get(1).getZ());
-                    Vector vector2 = new Vector(vertices.get(2).getX(), vertices.get(2).getY(), vertices.get(2).getZ());
+                    Vector vector0 =
+                            new Vector(vertices.get(Constants.ZERO).getX(),
+                                    vertices.get(Constants.ZERO).getY(),
+                                    vertices.get(Constants.ZERO).getZ());
+                    Vector vector1 =
+                            new Vector(vertices.get(Constants.ONE).getX(),
+                                    vertices.get(Constants.ONE).getY(),
+                                    vertices.get(Constants.ONE).getZ());
+                    Vector vector2 =
+                            new Vector(vertices.get(Constants.TWO).getX(),
+                                    vertices.get(Constants.TWO).getY(),
+                                    vertices.get(Constants.TWO).getZ());
 
                     Vector crossProduct = vector1.crossProduct(vector2);
 
                     float dotProduct = vector0.dotProduct(crossProduct);
 
-                    double tempVolume = dotProduct / 6.0;
+                    double tempVolume = dotProduct / Constants.SIX_ZERO;
                     volume += tempVolume;
                 }
             }
-            Console.log(Literals.VOLUME_CALCULATION_COMPLETE + Math.abs(volume) + Literals.VOLUME_UNIT);
+            Console.log(Literals.VOLUME_CALCULATION_COMPLETE +
+                    Math.abs(volume) + Literals.VOLUME_UNIT);
         }
     }
 }
