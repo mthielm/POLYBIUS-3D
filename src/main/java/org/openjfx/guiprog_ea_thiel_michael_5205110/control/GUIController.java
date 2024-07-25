@@ -2,8 +2,6 @@ package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,7 +9,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -70,17 +67,13 @@ public class GUIController implements Initializable
     }
 
     /**
-     * Stage of the GUI
+     * Anchor points for the rotation
      */
-    private Stage stage;
-    /**
-     * Camera of the GUI
-     */
-    private PerspectiveCamera camera;
+    double anchorX;
     /**
      * Anchor points for the rotation
      */
-    double anchorX, anchorY, anchorZ;
+    double anchorY;
     /**
      * Rotation speed of the mesh
      */
@@ -93,10 +86,6 @@ public class GUIController implements Initializable
      * Anchor angles for the rotation
      */
     private double anchorAngleY = Constants.ZERO;
-    /**
-     * Anchor angles for the rotation
-     */
-    private double anchorAngleZ = Constants.ZERO;
 
     /**
      * Pivot points for the rotation
@@ -140,42 +129,6 @@ public class GUIController implements Initializable
     public MenuItem closeButton;
 
     /**
-     * Button for changing the material
-     */
-    @FXML
-    private Button rotateButtonDown;
-
-    /**
-     * Button for changing the material
-     */
-    @FXML
-    private Button rotateButtonLeft;
-
-    /**
-     * Button for changing the material
-     */
-    @FXML
-    private Button rotateButtonRight;
-
-    /**
-     * Button for changing the material
-     */
-    @FXML
-    private Button rotateButtonUp;
-
-    /**
-     * Button for changing the material
-     */
-    @FXML
-    private Button zoomButton;
-
-    /**
-     * Button for changing the material
-     */
-    @FXML
-    private Button zoomOutButton;
-
-    /**
      * Slider for the velocity
      */
     @FXML
@@ -200,63 +153,17 @@ public class GUIController implements Initializable
     private Text info_polygoncount;
 
     /**
-     * Button for continuous rotation
-     */
-    @FXML
-    private RadioButton continuousRotateButtonStart;
-
-    /**
-     * Button for continuous rotation
-     */
-    @FXML
-    private RadioButton continuousRotateButtonStop;
-
-    /**
      * Method to initialize the GUI
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        velocitySlider.valueProperty().addListener(new ChangeListener<Number>()
-        {
-            // This method is called whenever the velocitySlider value changes
-            @Override
-            public void changed(ObservableValue<? extends Number>
-                                observableValue, Number number, Number t1) {
-                rotationSpeed = (int) velocitySlider.getValue();
-            }
-        });
-
-        //startCommandThreads();
+        // This method is called whenever the velocitySlider value changes
+        velocitySlider.valueProperty().addListener(
+                (observableValue, number, t1) ->
+                        rotationSpeed = (int) velocitySlider.getValue());
 
         aboutMenuItem.setOnAction(this::handleAboutMenuItemAction);
-    }
-
-    /**
-     * Method to set the filename text
-     *
-     * @param info1 The filename text
-     */
-    public void setInfo_filename(String info1) {
-        info_filename.setText(info1);
-    }
-
-    /**
-     * Method to set the format text
-     *
-     * @param info2 The format text
-     */
-    public void setInfo_format(String info2) {
-        info_format.setText(info2);
-    }
-
-    /**
-     * Method to set the polygon count text
-     *
-     * @param info3 The polygon count text
-     */
-    public void setInfo_polygoncount(int info3) {
-        info_polygoncount.setText(String.valueOf(info3));
     }
 
     /**
@@ -281,15 +188,12 @@ public class GUIController implements Initializable
     public Group drawMesh(Scene scene)
     {
         meshView = new MeshView(Polygon3D.getInstance());
-        //meshView = new MeshView(new Polygon3D());
 
         meshView.setMaterial(new PhongMaterial(Color.BLACK));
         meshView.setTranslateX((scene.getWidth()/Constants.TWO));
         meshView.setTranslateY((scene.getHeight()/Constants.TWO)
                 -Constants.ONEHUNDRED);
         meshView.setCullFace(CullFace.NONE);
-        //meshView.setDrawMode(DrawMode.LINE);
-
         meshView.setRotationAxis(X_AXIS);
         meshView.setRotate(Constants.NINETY);
 
@@ -297,8 +201,6 @@ public class GUIController implements Initializable
         meshView.setTranslateX(Constants.FOURHUNDRETTWENTY);
         meshView.setTranslateY(+Constants.ONEHUNDRETFIFTY);
         meshView.setTranslateZ(-Constants.FOURHUNDRETFIFTY);
-
-
 
         Rotate rotateX = new Rotate(Constants.ZERO, pivotX, pivotY, pivotZ,
                 X_AXIS);
@@ -370,25 +272,13 @@ public class GUIController implements Initializable
         }
     }
 
-/*    public void rotate(String axis, float angle)
-    {
-        // Implement the code to rotate the meshView object
-        if (axis.equals("x"))
-            meshView.getTransforms().add(new Rotate(angle,pivotX, pivotY, pivotZ, Rotate.X_AXIS));
-        else if (axis.equals("y"))
-            meshView.getTransforms().add(new Rotate(angle,pivotX, pivotY, pivotZ, Rotate.Y_AXIS));
-        else if (axis.equals("z"))
-            meshView.getTransforms().add(new Rotate(angle,pivotX, pivotY, pivotZ, Rotate.Z_AXIS));
-    }*/
-
     /**
      * Method to set the stage
      *
-     * @param stage The stage to set
      */
-    public void setStage(Stage stage)
+    public void setStage()
     {
-        this.stage = stage;
+        // Set the stage
     }
 
     /**
@@ -436,26 +326,20 @@ public class GUIController implements Initializable
         choiceBox.getSelectionModel().selectedItemProperty().addListener
                 ((observable, oldValue, newValue) -> {
             PhongMaterial material = new PhongMaterial();
-            switch (newValue) {
-                case Literals.RED:
-                    material.setDiffuseColor(Color.RED);
-                    break;
-                case Literals.GREEN:
-                    material.setDiffuseColor(Color.GREEN);
-                    break;
-                case Literals.BLUE:
-                    material.setDiffuseColor(Color.BLUE);
-                    break;
-                case Literals.ORANGE:
-                    material.setDiffuseColor(Color.ORANGE);
-                    break;
-                case Literals.YELLOW:
-                    material.setDiffuseColor(Color.YELLOW);
-                    break;
-                case Literals.BLACK:
-                    material.setDiffuseColor(Color.BLACK);
-                    break;
-            }
+                    switch (newValue) {
+                        case Literals.RED ->
+                                material.setDiffuseColor(Color.RED);
+                        case Literals.GREEN ->
+                                material.setDiffuseColor(Color.GREEN);
+                        case Literals.BLUE ->
+                                material.setDiffuseColor(Color.BLUE);
+                        case Literals.ORANGE ->
+                                material.setDiffuseColor(Color.ORANGE);
+                        case Literals.YELLOW ->
+                                material.setDiffuseColor(Color.YELLOW);
+                        case Literals.BLACK ->
+                                material.setDiffuseColor(Color.BLACK);
+                    }
             meshView.setMaterial(material);
         });
 
@@ -470,35 +354,13 @@ public class GUIController implements Initializable
         dialogStage.show();
     }
 
-    //Maybe move somewhere else
-    /**
-     * Method to start the command threads
-     */
-    public void startCommandThreads()
-    {
-        (new Thread(new CommandServer(Constants.PORT))).start();
-        while (!CommandServer.isAccepting()) {
-            try
-            {
-                Thread.sleep(Constants.MILLISECONDS);
-            }
-            catch (InterruptedException e)
-            {
-                throw new RuntimeException(e);
-            }
-        }
-        (new Thread(new CommandClient(Literals.HOST_NAME, Constants.PORT))).
-                start();
-    }
-
     /**
      * Method to set the camera
      *
-     * @param camera The camera to set
      */
-    public void setCamera(PerspectiveCamera camera)
+    public void setCamera()
     {
-        this.camera = camera;
+        // Set the camera
     }
 
     /**
@@ -545,11 +407,9 @@ public class GUIController implements Initializable
             rotationTimeline =
                     new Timeline(new KeyFrame(Duration.millis(Constants.SIXTEEN),
                     e ->
-            {
-                meshView.getTransforms().add(new Rotate(
-                        rotationSpeed/Constants.FIFTY,
-                        pivotX, pivotY, pivotZ, Z_AXIS));
-            }));
+                            meshView.getTransforms().add(new Rotate(
+                                    rotationSpeed/Constants.FIFTY,
+                                    pivotX, pivotY, pivotZ, Z_AXIS))));
             rotationTimeline.setCycleCount(Timeline.INDEFINITE);
         }
         rotationTimeline.play();
@@ -655,8 +515,7 @@ public class GUIController implements Initializable
         double rotationX = Constants.ZERO, rotationY = Constants.ZERO,
                rotationZ = Constants.ZERO;
         for (Transform transform : meshView.getTransforms()) {
-            if (transform instanceof Rotate) {
-                Rotate rotate = (Rotate) transform;
+            if (transform instanceof Rotate rotate) {
                 Point3D axis = rotate.getAxis();
                 if (axis.equals(X_AXIS)) {
                     rotationX += rotate.getAngle();

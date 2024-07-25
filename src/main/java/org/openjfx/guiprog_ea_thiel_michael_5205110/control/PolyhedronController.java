@@ -8,7 +8,6 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -45,52 +44,6 @@ public class PolyhedronController
         return instance;
     }
 
-    /**
-     * Calculates the surface area of a given polyhedron.
-     *
-     * @param polyhedron The polyhedron for which the surface area is to be
-     *                   calculated.
-     */
-    public void calculateSurface(Polyhedron polyhedron)
-    {
-        List<Polygon> polygons = polyhedron.getPolygons();
-
-        for (Polygon polygon : polygons)
-        {
-            PolygonController.getInstance().calculateArea(polygon);
-        }
-
-        double tempArea = Constants.DEFAULT_AREA;
-
-        for (Polygon polygon : polygons)
-        {
-            tempArea += polygon.getArea();
-        }
-        polyhedron.setSurfaceArea(tempArea);
-    }
-
-
-    /**
-     * Sorts the polygons of a polyhedron by their area.
-     *
-     * @param polyhedron The polyhedron to be sorted.
-     */
-    public void sortByArea(Polyhedron polyhedron)
-    {
-        Console.log(Literals.SORT_BEFORE);
-        List<Polygon> polygons = polyhedron.getPolygons();
-        Console.log(polygons.toString());
-        polygons.sort(new Comparator<Polygon>()
-        {
-            @Override
-            public int compare(Polygon p1, Polygon p2)
-            {
-                return Double.compare(p1.getArea(), p2.getArea());
-            }
-        });
-        Console.log(Literals.SORT_AFTER);
-        Console.log(polygons.toString());
-    }
 
     /**
      * Calculates the volume of a given polyhedron.
@@ -104,7 +57,6 @@ public class PolyhedronController
             double volume = Constants.DEFAULT_VOLUME;
             for (Polygon polygon : polygons)
             {
-                Vector normal = polygon.getNormal();
                 List<Vertex> vertices = polygon.getVertices();
                 if (vertices.size() >= Constants.THREE)
                 {

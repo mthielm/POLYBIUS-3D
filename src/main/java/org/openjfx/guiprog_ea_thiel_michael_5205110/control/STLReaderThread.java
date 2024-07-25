@@ -12,7 +12,7 @@ public class STLReaderThread extends Thread {
     /**
      * The file to be read.
      */
-    private String file;
+    private final String file;
     /**
      * The polyhedron that is created from the file.
      */
@@ -33,11 +33,9 @@ public class STLReaderThread extends Thread {
     @Override
     public void run() {
         Console.log(Literals.PARSING_FILE + file);
-        STLReader reader = new STLReader();
-        polyhedron = reader.parse(file);
+        polyhedron = STLReader.parse(file);
         // Add a special "end" polygon to signal the end of parsing
         PolygonListManager.getInstance().addPolygon(new Polygon());
-        //Console.log("Reader thread stopped");
     }
 
     /**

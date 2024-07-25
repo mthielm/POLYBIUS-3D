@@ -12,8 +12,7 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Timer;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
 
-// ToDo: control-package: check comments, dead-code, warnings, and
-//  refactorings.
+// ToDo: control-package -> check comments and warnings!
 /**
  * Main class of the program. Initializes the program and starts the GUI.
  *
@@ -22,7 +21,8 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
 public class Main
 {
     /**
-     * Main method of the program. Starts the program, prompts the user for a file name.
+     * Main method of the program. Starts the program, prompts the user for a
+     * file name.
      * Parses the file and initializes the GUI. Opens a connection for Peer2Peer.
      *
      * @param args Command line arguments
@@ -35,7 +35,6 @@ public class Main
         // Prompts the user to enter a file name
         Scanner scanner = new Scanner();
         String filePath = scanner.prompt();
-
 
         // Starts a timer to measure parse time
         Timer timer = new Timer();
@@ -58,15 +57,8 @@ public class Main
             e.printStackTrace();
         }
 
-        // Stops the timer and prints the runtime
-        //timer.stop();
-        //Console.log(timer.getRuntime() + Literals.SECONDS);
-
         // Retrieves the polyhedron from the reader thread
         Polyhedron polyhedron = readerThread.getPolyhedron();
-
-        //Sort polygons by surface area
-        //PolyhedronController.getInstance().sortByArea(polyhedron);
 
         //Calculate volume of polyhedron
         PolyhedronController.getInstance().calculateVolume(polyhedron);
@@ -81,8 +73,6 @@ public class Main
         // Sets up the TriangleMesh object
         Polygon3D polygon3D = Polygon3D.getInstance();
         polygon3D.setupMesh(points, textures, combinedFaces);
-
-        //PolyhedronViewer.main(args);
 
         // Starts GUI and opens connection for Peer2Peer
         Peer2PeerTest peer2PeerTest = new Peer2PeerTest();

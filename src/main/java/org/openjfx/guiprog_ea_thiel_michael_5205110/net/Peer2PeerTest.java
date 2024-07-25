@@ -11,7 +11,7 @@ public class Peer2PeerTest {
         new Thread(() -> {
             CommandServer server = new CommandServer(1234);
             new Thread(server).start();
-            while (!CommandServer.isAccepting()) {
+            while (CommandServer.isAccepting()) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {

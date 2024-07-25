@@ -155,9 +155,9 @@ public class STLReader
 
         Polyhedron polyhedron = new Polyhedron();
         Polygon tempPoly = new Polygon();
-        Vector tempFace = null;
+        Vector tempFace;
 
-        for (int i = 0; i < numberOfTriangles; i++)
+        for (int i = Constants.ZERO; i < numberOfTriangles; i++)
         {
             float nx = readFloat(inputStream);
             float ny = readFloat(inputStream);

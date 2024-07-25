@@ -19,8 +19,6 @@ public class SurfaceCalculatorThread extends Thread {
      */
     @Override
     public void run() {
-        //Console.log("Surface calculator thread started");
-        int iterations = Constants.ONE;
         while (true) {
             Polygon polygon = PolygonListManager.getInstance().
                                                  getAndRemovePolygon();
@@ -33,17 +31,6 @@ public class SurfaceCalculatorThread extends Thread {
             // calculate surface area
             PolygonController.getInstance().calculateArea(polygon);
             surfaceArea += polygon.getArea();
-            //Console.log("Calculated Polygon Number" + iterations);
-            iterations++;
         }
-    }
-
-    /**
-     * Getter for the surface area.
-     *
-     * @return the surface area
-     */
-    public double getSurfaceArea() {
-        return surfaceArea;
     }
 }

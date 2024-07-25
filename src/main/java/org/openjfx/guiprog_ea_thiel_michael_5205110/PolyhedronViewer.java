@@ -47,7 +47,7 @@ public class PolyhedronViewer extends Application
         AnchorPane root = loader.load();
         GUIController controller = loader.getController();
 
-        controller.setStage(stage);
+        controller.setStage();
 
         Scene scene = new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 
@@ -70,7 +70,7 @@ public class PolyhedronViewer extends Application
 
         PerspectiveCamera perspectiveCamera = new PerspectiveCamera(false);
         scene.setCamera(perspectiveCamera);
-        controller.setCamera(perspectiveCamera);
+        controller.setCamera();
 
         stage.setScene(scene);
         stage.show();

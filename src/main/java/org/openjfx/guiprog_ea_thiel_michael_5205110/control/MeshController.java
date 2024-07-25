@@ -2,7 +2,6 @@ package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polygon;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
-import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Vertex;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
@@ -23,7 +22,6 @@ public class MeshController {
             Polygon polygon = polyhedron.getPolygons().get(i);
 
             for (int j = Constants.ZERO; j < Constants.THREE; j++) {
-                Vertex vertex = polygon.getVertices().get(j);
 
                 points[(i * Constants.NINE) + (j * Constants.THREE)] =
                         polygon.getVertices().get(j).getX() *
@@ -124,26 +122,6 @@ public class MeshController {
         double originY = sumY / countY;
         double originZ = sumZ / countZ;
 
-        double[] origin = {originX, originY, originZ};
-
-        return origin;
+        return new double[]{originX, originY, originZ};
     }
-
-/*    public double[] findOrigin(float[] points) {
-        double x = 0;
-        double y = 0;
-        double z = 0;
-        for (int i = 0; i < points.length; i += 3) {
-            x += points[i];
-            y += points[i + 1];
-            z += points[i + 2];
-        }
-        x /= points.length / 3;
-        y /= points.length / 3;
-        z /= points.length / 3;
-
-        double[] origin = {x, y, z};
-
-        return origin;
-    }*/
 }

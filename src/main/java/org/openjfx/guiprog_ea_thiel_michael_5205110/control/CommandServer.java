@@ -22,7 +22,7 @@ public class CommandServer implements Runnable
     /**
      * Port number of the server
      */
-    private int portNumber = -1;
+    private final int portNumber;
 
     /**
      * Constructor of the CommandServer
@@ -41,7 +41,7 @@ public class CommandServer implements Runnable
      */
     public static boolean isAccepting()
     {
-        return isAccepting;
+        return !isAccepting;
     }
 
     /**
@@ -51,7 +51,7 @@ public class CommandServer implements Runnable
     @Override
     public void run()
     {
-        java.net.ServerSocket server = null;
+        java.net.ServerSocket server;
         try
         {
             server = new java.net.ServerSocket(this.portNumber);
@@ -117,35 +117,6 @@ public class CommandServer implements Runnable
                 Console.log(Literals.ERROR_IN_OUT + e.getMessage());
             }
         }
-
-    /*private static void parseCommand(String input)
-    {
-        String[] parts = input.split(" ");
-        Console.log("Command: " + parts[0] + "/" + parts[1] + "/" + parts[2]);
-        String command = parts[0];
-        if (command.equals("translate"))
-        {
-
-            // Perform translation
-            String axis = parts[1];
-            float distance = Float.parseFloat(parts[2]);
-
-            // Call the method in MeshController class to translate
-            GUIController.getInstance().translate(axis, distance);
-            Console.log("Tatsächlich angesteuerter Controller: " + GUIController.getInstance());
-
-            Console.log("Translation: (" + axis + "," + distance + ")");
-        } else if (command.equals("rotate"))
-        {
-
-            // Perform rotation
-            String axis = parts[1];
-            float angle = Float.parseFloat(parts[2]);
-            // Call the method in MeshController class to rotate
-            GUIController.getInstance().rotate(axis, angle);
-            Console.log("Rotation: (" + axis + "," + angle + ")");
-        }
-    }*/
 
     /**
      * Method to receive a Polyhedron from the client.

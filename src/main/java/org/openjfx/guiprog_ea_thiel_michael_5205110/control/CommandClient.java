@@ -1,12 +1,8 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
-import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
-
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class to send commands to the server.
@@ -20,11 +16,11 @@ public class CommandClient implements Runnable
     /**
      * Hostname of the server
      */
-    private String hostName = null;
+    private final String hostName;
     /**
      * Port number of the server
      */
-    private int portNumber = -1;
+    private final int portNumber;
 
     /**
      * Constructor of the CommandClient
@@ -61,8 +57,6 @@ public class CommandClient implements Runnable
         }
         catch (java.io.IOException e)
         {
-            //Console.log("P2P: Waiting to establish connection...");
-            //Console.log("Error: " + e.getMessage());
             return null;
         }
     }
@@ -75,22 +69,17 @@ public class CommandClient implements Runnable
     private void readAndSend(java.net.Socket socket)
     {
         while (socket == null) {
-            //Console.log("Error: Could not connect to server. Retrying in 1
-            // second...");
             try {
-                Thread.sleep(Constants.TENTHOUSAND); // wait for 1 second before
-                                                     // retrying
+                Thread.sleep(Constants.TENTHOUSAND);
                 socket = openSocket();
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt(); // restore interrupted
-                                                    // status
+                Thread.currentThread().interrupt();
                 return;
             }
         }
 
         try
         {
-
             java.io.BufferedReader in = new java.io.BufferedReader
                     (new java.io.InputStreamReader(socket.getInputStream()));
             java.io.PrintWriter out = new java.io.PrintWriter
@@ -102,16 +91,20 @@ public class CommandClient implements Runnable
 
             while(true)
             {
-                command = keyboard.readLine();
-                if(command.length() > Constants.ZERO)
-                {
-                    // Send the command to the client
-                    out.println(command);
+                try {
+                    command = keyboard.readLine();
+                    if(command.length() > Constants.ZERO)
+                    {
+                        out.println(command);
 
-                    GUIController.getInstance().parseCommand(command);
-                }
-                else
+                        GUIController.getInstance().parseCommand(command);
+                    }
+                    else
+                        break;
+                } catch (java.io.IOException e) {
+                    Console.log(Literals.ERROR + e.getMessage());
                     break;
+                }
             }
             out.close();
             in.close();
@@ -120,23 +113,6 @@ public class CommandClient implements Runnable
         }
         catch (java.io.IOException e)
         {
-            Console.log(Literals.ERROR + e.getMessage());
-        }
-    }
-
-    //P2P SEND
-    /**
-     * Method to send a Polyhedron to the server.
-     *
-     * @param polyhedron The Polyhedron to send
-     * @param socket The socket to the server
-     */
-    public void sendPolyhedron(Polyhedron polyhedron, java.net.Socket socket) {
-        try {
-            ObjectOutputStream out = new ObjectOutputStream
-                    (socket.getOutputStream());
-            out.writeObject(polyhedron);
-        } catch (IOException e) {
             Console.log(Literals.ERROR + e.getMessage());
         }
     }

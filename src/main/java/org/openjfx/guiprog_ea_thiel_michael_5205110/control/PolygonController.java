@@ -4,7 +4,6 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polygon;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Vector;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Vertex;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
-import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 import java.util.List;
 

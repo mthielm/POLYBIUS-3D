@@ -47,7 +47,6 @@ public class PolygonListManager {
      */
     public synchronized void addPolygon(Polygon polygon) {
         list.add(polygon);
-        //Console.log("Polygon added to list");
         notifyAll();  // Notify any waiting threads that a new polygon is
                       // available
     }
@@ -65,7 +64,6 @@ public class PolygonListManager {
                 e.printStackTrace();
             }
         }
-        //Console.log("Items remaining: " + list.size());
         return list.remove(Constants.ZERO);
     }
 }
