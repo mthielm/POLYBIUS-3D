@@ -1,4 +1,4 @@
-package org.openjfx.guiprog_ea_thiel_michael_5205110;
+package org.openjfx.guiprog_ea_thiel_michael_5205110.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,6 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.model.FileInfo;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.File;
-import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
 
 import java.io.IOException;
 
@@ -62,7 +61,7 @@ public class PolyhedronViewer extends Application
 
         //Alternative Rotation Code
         MeshController meshController = new MeshController();
-        double[] origin = meshController.findOrigin(Polygon3D.getInstance().
+        double[] origin = meshController.findOrigin(PolyhedronMesh.getInstance().
                 getPoints().toArray(new float[Constants.ZERO]));
         GUIController.getInstance().setPivotX(origin[Constants.ZERO]);
         GUIController.getInstance().setPivotY(origin[Constants.ONE]);

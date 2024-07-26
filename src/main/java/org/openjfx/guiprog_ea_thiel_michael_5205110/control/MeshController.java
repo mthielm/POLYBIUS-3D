@@ -5,6 +5,7 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.view.PolyhedronMesh;
 
 /**
  * This class is responsible for mapping the points of the polyhedron to a
@@ -138,5 +139,15 @@ public class MeshController {
         double originZ = sumZ / countZ;
 
         return new double[]{originX, originY, originZ};
+    }
+
+    public void drawMesh(Polyhedron polyhedron)
+    {
+        float[] points = mapPoints(polyhedron);
+        int[] faces = createFaces(polyhedron);
+        float[] textures = createTextures(polyhedron);
+        int[] combinedFaces = mapFaces(faces, textures);
+
+        PolyhedronMesh.getInstance().setupMesh(points, textures, combinedFaces);
     }
 }

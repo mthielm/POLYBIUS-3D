@@ -103,7 +103,7 @@ public class CommandClient implements Runnable
             {
                 try {
                     command = keyboard.readLine();
-                    if(command.length() > Constants.ZERO)
+                    if(!command.isEmpty())
                     {
                         out.println(command);
 

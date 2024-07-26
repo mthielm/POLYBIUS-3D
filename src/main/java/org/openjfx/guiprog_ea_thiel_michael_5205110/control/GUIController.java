@@ -26,7 +26,7 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.model.Polyhedron;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Constants;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
-import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Polygon3D;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.view.PolyhedronMesh;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -171,7 +171,7 @@ public class GUIController implements Initializable
      */
     public Group drawMesh(Scene scene)
     {
-        meshView = new MeshView(Polygon3D.getInstance());
+        meshView = new MeshView(PolyhedronMesh.getInstance());
 
         meshView.setMaterial(new PhongMaterial(Color.BLACK));
         meshView.setTranslateX((scene.getWidth()/Constants.TWO));
@@ -531,7 +531,7 @@ public class GUIController implements Initializable
         int[] faces = meshController.createFaces(polyhedron);
         float[] textures = meshController.createTextures(polyhedron);
         int[] combinedFaces = meshController.mapFaces(faces, textures);
-        Polygon3D.getInstance().setupMesh(points, textures, combinedFaces);
+        PolyhedronMesh.getInstance().setupMesh(points, textures, combinedFaces);
     }
 
     /**

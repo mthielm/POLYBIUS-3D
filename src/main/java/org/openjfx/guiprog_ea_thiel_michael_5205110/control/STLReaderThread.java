@@ -39,7 +39,7 @@ public class STLReaderThread extends Thread {
         Console.log(Literals.PARSING_FILE + file);
         polyhedron = STLReader.parse(file);
         // Add a special "end" polygon to signal the end of parsing
-        PolygonListManager.getInstance().addPolygon(new Polygon());
+        PolygonStack.getInstance().addPolygon(new Polygon());
     }
 
     /**

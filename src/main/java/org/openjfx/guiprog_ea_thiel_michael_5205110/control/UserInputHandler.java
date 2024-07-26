@@ -1,26 +1,22 @@
-package org.openjfx.guiprog_ea_thiel_michael_5205110.util;
+package org.openjfx.guiprog_ea_thiel_michael_5205110.control;
 
 import org.openjfx.guiprog_ea_thiel_michael_5205110.model.FileInfo;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.util.File;
+import org.openjfx.guiprog_ea_thiel_michael_5205110.util.Literals;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
-/**
- * Scanner for user input.
- * The input is used to construct the full file path for the STLReader.
- *
- * @author mthiel
- */
-public class Scanner
+public class UserInputHandler
 {
-    /**
-     * Prompts the user to enter a file name.
-     *
-     * @return The full file path.
-     * @Precondition: -
-     * @Postcondition: The full file path is returned.
-     */
-    public String prompt()
+    public void printWelcomeMessage()
     {
-        // Create a Scanner object for user input
+        // Print welcome message and title
+        Console.log(Literals.WELCOME_TITLE);
+        Console.log(Literals.WELCOME_MESSAGE);
+    }
+
+    public String getFilePathFromUser()
+    {
+        // Create a Scanner to read user input from console
         java.util.Scanner scanner = new java.util.Scanner(System.in);
         Console.log(Literals.PROMPT_FILE_NAME);
         String fileName = scanner.nextLine();
@@ -34,3 +30,4 @@ public class Scanner
         return filePath;
     }
 }
+

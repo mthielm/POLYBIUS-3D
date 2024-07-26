@@ -119,7 +119,7 @@ public class STLReader {
                 FileInfo.getInstance().setFileFormat(File.ASCII_FORMAT);
 
                 // Concurrent calculation of volume
-                PolygonListManager.getInstance().addPolygon(tempPoly);
+                PolygonStack.getInstance().addPolygon(tempPoly);
 
                 tempPoly = new Polygon();
                 tempFace = null;
@@ -194,7 +194,7 @@ public class STLReader {
             polyhedron.setNumPolygons(numberOfTriangles);
 
             // Concurrent calculation of volume
-            PolygonListManager.getInstance().addPolygon(tempPoly);
+            PolygonStack.getInstance().addPolygon(tempPoly);
 
             tempPoly = new Polygon();
         }

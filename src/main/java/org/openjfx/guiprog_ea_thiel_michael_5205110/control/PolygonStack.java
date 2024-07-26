@@ -17,12 +17,12 @@ import java.util.List;
  * @see List
  * @see LinkedList
  */
-public class PolygonListManager {
+public class PolygonStack {
     /** The singleton instance of the class. */
-    private static final PolygonListManager instance = new PolygonListManager();
+    private static final PolygonStack instance = new PolygonStack();
 
     /** The list of polygons. */
-    private final List<Polygon> list;
+    private final List<Polygon> list = new LinkedList<>();
 
     /**
      * Default private Constructor.
@@ -30,9 +30,7 @@ public class PolygonListManager {
      * @Postcondition: The list is initialized as a new LinkedList.
      * @Precondition: -
      */
-    private PolygonListManager() {
-        list = new LinkedList<>();
-    }
+    private PolygonStack(){}
 
     /**
      * Returns the singleton instance of the class.
@@ -41,7 +39,7 @@ public class PolygonListManager {
      * @Precondition: -
      * @Postcondition: The singleton instance of the class is returned
      */
-    public static synchronized PolygonListManager getInstance() {
+    public static synchronized PolygonStack getInstance() {
         return instance;
     }
 

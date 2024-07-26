@@ -105,7 +105,7 @@ public class CommandServer implements Runnable
                     (client.getOutputStream(), true);
             String inputLine;
             while((inputLine = in.readLine()) != null)
-                if (inputLine.length() > Constants.ZERO)
+                if (!inputLine.isEmpty())
                 {
                     // Code to send the command to the GUI to either
                     // translate or rotate object i.e. translate(axis,

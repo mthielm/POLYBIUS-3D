@@ -24,7 +24,7 @@ public class SurfaceCalculatorThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            Polygon polygon = PolygonListManager.getInstance().
+            Polygon polygon = PolygonStack.getInstance().
                                                  getAndRemovePolygon();
             // Stop when we see the "end" polygon
             if (polygon.getVertices().isEmpty()) {
