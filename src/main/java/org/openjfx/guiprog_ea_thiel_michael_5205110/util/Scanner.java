@@ -4,7 +4,7 @@ import org.openjfx.guiprog_ea_thiel_michael_5205110.model.FileInfo;
 import org.openjfx.guiprog_ea_thiel_michael_5205110.view.Console;
 
 /**
- * Represents a scanner for user input.
+ * Scanner for user input.
  * The input is used to construct the full file path for the STLReader.
  *
  * @author mthiel

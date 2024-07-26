@@ -1,7 +1,7 @@
 package org.openjfx.guiprog_ea_thiel_michael_5205110.util;
 
 /**
- * Represents a timer to measure the runtime of the program.
+ * Timer to measure the runtime of the program.
  * The timer uses the System.currentTimeMillis() method to measure the time.
  *
  * @author mthiel
